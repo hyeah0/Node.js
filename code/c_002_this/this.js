@@ -1,4 +1,4 @@
-//실행 : node C_002_this
+//실행 : node c_002_this/this
 
 console.clear();
 

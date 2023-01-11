@@ -1,4 +1,4 @@
-//실행 : node C_001_console
+//실행 : node c_001_console/this
 
 console.log('console.log.........');
 console.clear();
