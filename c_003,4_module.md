@@ -1,10 +1,11 @@
 ## 다른 js 파일 메서드 사용하기
 
+- app.js 파일에 counter.js 파일의 메서드를 사용
+
 ### 방법 1. module.exports 사용 하기
 
-- app.js 파일에 counter.js 파일의 메서드를 사용
-- counter.js 파일에는 module.exports를 사용
-- app.js 파일에는 require 함수 사용
+1. counter.js 파일에는 module.exports를 사용
+2. app.js 파일에는 require 함수 사용
 
 - [counter.js](https://github.com/hyeah0/Node.js/blob/main/code/c_003_module/counter.js)
 - [app.js](https://github.com/hyeah0/Node.js/blob/main/code/c_003_module/app.js)
