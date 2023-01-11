@@ -6,8 +6,8 @@
 - counter.js 파일에는 module.exports를 사용
 - app.js 파일에는 require 함수 사용
 
-- [counter.js]()
-- [app.js]()
+- [counter.js](https://github.com/hyeah0/Node.js/blob/main/code/c_003_module/counter.js)
+- [app.js](https://github.com/hyeah0/Node.js/blob/main/code/c_003_module/app.js)
 
 ### 방법 2. 패키지 파일을 생성하기
 
@@ -22,6 +22,6 @@
    <br> 또는 전체 메서드 사용하고 싶을 경우
    <br> `import * as counter from './counter.js'`
 
-- [package.json]()
-- [counter.js]()
-- [app.js]()
+- [package.json](https://github.com/hyeah0/Node.js/blob/main/code/c_004_module/package.json)
+- [counter.js](https://github.com/hyeah0/Node.js/blob/main/code/c_004_module/counter.js)
+- [app.js](https://github.com/hyeah0/Node.js/blob/main/code/c_004_module/app.js)
