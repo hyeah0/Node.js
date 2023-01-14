@@ -70,9 +70,9 @@
 
 ## 코드
 
-<img src="https://github.com/hyeah0/Node.js/blob/main/img/c_001_console_img.png" width="80%">
+<img src="https://github.com/hyeah0/Node.js/blob/main/01_Modules/img/c_001_console_img.png" width="80%">
 
-- [코드 링크](https://github.com/hyeah0/Node.js/blob/main/code/c_001_console.js)
+- [코드 링크](https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_001_console/console.js)
 
 ```
 //실행 : node C_001_console
