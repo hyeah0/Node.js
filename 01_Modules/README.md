@@ -22,13 +22,13 @@
     <tr>
       <th>모듈명</th>
       <th>설명</th>
-      <th>링크</th>
+      <th>코드링크</th>
     </tr>
     <tr>
       <td>os</td>
       <td>운영체제 및 관련 유틸리티에 대한 메서드와 프로퍼티 정보 확인</td>
       <td>
-        <a href="">
+        <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_005_os%2Cprocess/os.js">
           링크
         </a>
       </td>
@@ -37,7 +37,7 @@
       <td>process</td>
       <td>프로그램과 관련된 정보</td>
       <td>
-        <a href="">
+        <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_005_os%2Cprocess/process.js">
           링크
         </a>
       </td>
@@ -46,7 +46,7 @@
       <td>path</td>
       <td>파일 위치(경로)</td>
       <td>
-        <a href="">
+        <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_007_path/app.js">
           링크
         </a>
       </td>
@@ -55,8 +55,8 @@
       <td>fs</td>
       <td>파일시스템(파일명, 파일추가..)</td>
       <td>
-        <a href="">
-          링크
+        <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/c_008_file.md">
+          정리링크
         </a>
       </td>
     </tr>
