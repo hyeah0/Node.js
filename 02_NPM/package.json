@@ -1,0 +1,16 @@
+{
+  "name": "02_npm",
+  "version": "1.0.0",
+  "description": "- Node Package Manager - 라이브러리 관리자 - [npm docs](https://docs.npmjs.com/cli/v7/commands/npm-init) - [npm version 관리 참고](https://docs.npmjs.com/about-semantic-versioning) - [npm version range 참고](https://semver.npmjs.com/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon NPM_test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
