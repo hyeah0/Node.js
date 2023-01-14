@@ -15,8 +15,8 @@ Node.js의 내장모듈 중 'process'는 프로그램과 관련된 정보를 나
 4. process.nextTick(()=>{})
 
 - 1000 == 1s
-- [setInterval 예시코드]()
-- [setTimeout, setImmdiate, process.nextTice 예시코드]()
+- [setInterval 예시코드](https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_006_timer/app.js)
+- [setTimeout, setImmdiate, process.nextTice 예시코드](https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_006_timer/app2.js)
 
 ### - 실행되는 순서
 
