@@ -72,6 +72,7 @@ major . minor . patch
 - 순서
   1. 터미널에 `npm init --yes`
   2. `npm i nodemon` 다운
+  - 전역 다운시 `npm i nodemon -g`
   3. package.json 파일 "scripts" 에 "start" 기입
      <br> `"start" : "nodemon 실행파일명"`
   4. `npm start` 입력
