@@ -23,6 +23,6 @@
    <br> 또는 전체 메서드 사용하고 싶을 경우
    <br> `import * as counter from './counter.js'`
 
-- [package.json]((https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_004_export_import/package.json)
+- [package.json](https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_004_export_import/package.json)
 - [counter.js](https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_004_export_import/counter.js)
 - [app.js](https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_004_export_import/app.js)
