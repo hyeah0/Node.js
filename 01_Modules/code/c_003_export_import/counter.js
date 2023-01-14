@@ -1,4 +1,4 @@
-//실행 : node c_003_module/counter
+//실행 : node c_003_export_import/counter
 
 let count =0;
 

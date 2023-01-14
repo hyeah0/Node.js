@@ -25,7 +25,7 @@
     </tr>
     <tr>
         <th>path.parse</th>
-        <td>파일경로를 key와 value값으로 나눔
+        <td>파일경로를 key와 value값으로 나눔(객체화)
         <br>path.parse(__filename).name
         </td>
     </tr>

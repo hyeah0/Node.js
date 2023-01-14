@@ -1,4 +1,4 @@
-//실행 : node c_003_module/app
+//실행 : node c_003_export_import/app
 
 // ReferenceError: count is not defined
 // console.log(count);

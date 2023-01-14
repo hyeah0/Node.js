@@ -1,4 +1,4 @@
-//실행 : node c_004_module/app
+//실행 : node c_004_export_import/app
 
 import{increase, getCount} from './counter.js';
 increase();
