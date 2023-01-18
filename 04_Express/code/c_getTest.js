@@ -53,19 +53,19 @@ app.get('/next',(req, res, next)=>{
 // app.all vs app.use --------------------------------------------------------------------------------
 // app.all : post, get으로 보내던 상관 없이 수행
 // 단, /appall 작성한 외의 url이 있을 경우 처리 되지 않는다.
-// /appall/* 로 보완 할 수는 있다.
+// /appall/* 로 작성 외의 url을 처리할 수는 있다.
 app.all('/appall',(req, res, next)=>{
     console.log('app.all');
     next();
 })
 
-// app.all : /appuse 뒤에 어떤 것이 와도 수행
+// app.use : /appuse 뒤에 어떤 것이 와도 수행
 app.use('/appuse',(req, res, next)=>{
     console.log('app.use');
     next();
 })
 
-// 처리할 수 없는 경로 처리
+// 처리할 수 없는 경로 처리(안정망과 비슷)
 app.use((req, res, next)=>{
     res.status(404).send('Not available!')
 })
