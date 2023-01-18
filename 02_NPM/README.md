@@ -47,6 +47,15 @@ major . minor . patch
 
 - `npm un 라이브러리이름`
 
+## - package-lock.json 삭제
+- `rm -rf package-lock.json`
+
+## - node-modules 삭제
+- `rm -rf node-modules`
+
+## - npm 모듈 재설치
+- `npm install`
+
 ## - NPM 라이브러리 업데이트
 
 - `npm outdate` >>> 업데이트가 필요한 라이브러리 확인 가능
