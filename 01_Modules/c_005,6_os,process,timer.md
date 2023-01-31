@@ -9,9 +9,9 @@ Node.js의 내장모듈 중 'process'는 프로그램과 관련된 정보를 나
 
 ## Timer
 
-1. setInterval(()=>{},1000), clearInterval()
-2. setTimeout(()=>{},1000)
-3. setImmdiate(()=>{})
+1. let a = setInterval(()=>{},1000), clearInterval(a)
+2. setTimeout(()=>{},1000), clearTimeout()
+3. setImmdiate(()=>{}), clearImmediate()
 4. process.nextTick(()=>{})
 
 - 1000 == 1s
