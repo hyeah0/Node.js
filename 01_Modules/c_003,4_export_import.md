@@ -2,7 +2,7 @@
 
 - app.js 파일에 counter.js 파일의 메서드를 사용
 
-### 방법 1. module.exports 사용 하기
+### 방법 1. module.exports 사용 하기(CommonJS 모듈)
 
 1. counter.js 파일에는 module.exports를 사용
 2. app.js 파일에는 require 함수 사용
@@ -10,7 +10,7 @@
 - [counter.js](https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_003_export_import/counter.js)
 - [app.js](https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_003_export_import/app.js)
 
-### 방법 2. 패키지 파일을 생성하기
+### 방법 2. 패키지 파일을 생성하기(ECMAScript 모듈 또는 Es 모듈)
 
 1. terminal에 `npt init --yes` 입력해 패키지 생성
 

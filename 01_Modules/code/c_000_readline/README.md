@@ -6,7 +6,7 @@
     </tr>
     <tr>
         <td>
-            <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_000_readline/readline01.js">
+            <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_000_readline/readline01.js"> 코드링크
         </td>
         <td>한 줄 입력 받기</td>
         <td>
@@ -18,7 +18,7 @@
     </tr>
     <tr>
         <td>
-            <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_000_readline/readline02.js">
+            <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_000_readline/readline02.js">코드링크
         </td>
         <td>공백 구분하여 입력 받기</td>
         <td>
@@ -32,7 +32,7 @@
     </tr>
     <tr>
         <td>
-            <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_000_readline/readline03.js">
+            <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_000_readline/readline03.js">코드링크
         </td>
         <td>여러 줄 입력받기</td>
         <td>
@@ -47,7 +47,7 @@
     </tr>
     <tr>
         <td>
-            <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_000_readline/readline04.js">
+            <a href="https://github.com/hyeah0/Node.js/blob/main/01_Modules/code/c_000_readline/readline04.js">코드링크
         </td>
         <td>공백이 포함된 여러줄 입력 받기</td>
         <td>

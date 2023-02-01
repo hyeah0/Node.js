@@ -61,6 +61,15 @@
       </td>
     </tr>
     <tr>
+      <td>readline</td>
+      <td>console 창에서 값 입력받기</td>
+      <td>
+        <a href="https://github.com/hyeah0/Node.js/tree/main/01_Modules/code/c_000_readline">
+          코드링크
+        </a>
+      </td>
+    </tr>
+    <tr>
       <td>events</td>
       <td>이벤트 처리</td>
       <td>-</td>
