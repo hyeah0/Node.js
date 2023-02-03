@@ -9,12 +9,11 @@
 
 ```
 {
-  usernum: string,          // 사용자 고유번호
-  userid: string,           // 사용자 id
-  usernick: string,         // 사용자 닉네임
-  username: string,         // 사용자 이름
+  id: string,               // 사용자 고유번호
   text: string,             // 글
   createdAt: Date,          // 글 생성 날짜
+  username: string,         // 사용자 이름
+  name: string              // 사용자 닉네임
   url: string (optional)    // 사용자 프로파일 사진 URL
 }
 ```
@@ -43,7 +42,7 @@
     <tr>
         <td>Read</td>
         <td>Get</td>
-        <td>/tweets/:usernum
+        <td>/tweets/:id
         <td>나의 글 목록 보기</td>
     </tr>
     <tr>
@@ -55,13 +54,13 @@
     <tr>
         <td>Update</td>
         <td>Put</td>
-        <td>/tweets/:usernum
+        <td>/tweets/:id
         <td>글 수정</td>
     </tr>
     <tr>
         <td>Delete</td>
         <td>Delete</td>
-        <td>/tweets/:usernum
+        <td>/tweets/:id
         <td>글 삭제</td>
     </tr>
 </table>
