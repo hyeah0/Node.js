@@ -9,8 +9,8 @@ Read    GET     /        전체 글 보기(restFront.html)
 Read    GET     /about   소개페이지(about.html)
 Read    GET     /users   유저 정보
 
-Update  POST    /user    수정
-Create  PUT     /user    등록
+Create  POST    /user    등록
+Update  PUT     /user    수정
 Delete  DELETE  /user    삭제
 */
 
