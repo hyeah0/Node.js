@@ -5,13 +5,13 @@ const path = require('path');
 const users = {}; // 데이터 저장용
 
 /*
-Read    GET     /        전체 글 보기(restFront.html)
-Read    GET     /about   소개페이지(about.html)
-Read    GET     /users   유저 정보
+Read    GET     /                전체 글 보기(restFront.html)
+Read    GET     /about           소개페이지(about.html)
+Read    GET     /users           유저 정보
 
-Create  POST    /user    등록
-Update  PUT     /user    수정
-Delete  DELETE  /user    삭제
+Create  POST    /user            등록
+Update  PUT     /user/사용자id     수정
+Delete  DELETE  /user/사용자id     삭제
 */
 
 http.createServer(async (req, res) => {
