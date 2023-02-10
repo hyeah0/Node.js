@@ -42,6 +42,10 @@ major . minor . patch
 
 - `npm list`
 - `npm list -g` >>> 전역 NPM 리스트 확인 가능
+- `npm ls nodemon` >>> 프로젝트에서 nodemon이 사용되고 있는지 확인
+
+- list, ls, ll 다 사용가능하다.
+  - ll 은 상세 확인 가능
 
 ## - NPM 라이브러리 삭제
 
