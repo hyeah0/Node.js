@@ -5,7 +5,6 @@ import express from 'express';
 import postRouter from './router/post.js';  // 설정된 router 가져오기
 import userRouter from './router/user.js';
 
-console.log('route');
 const app = express();
 
 app.use(express.json()); // REST API -> Body를 읽어올때 json 형태로 읽어오기

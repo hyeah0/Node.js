@@ -35,8 +35,9 @@ app.get('/response',(req, res)=>{
     // res.sendFile('파일주소');
     // res.json({name : 'Emily'});
 
-    // res.send, sendFile은 한개만 사용 가능 하다.
-    // [return]을 붙여 사용할 수 도 있다. 예시)return res.send(); 
+    // 응답은 한개만 사용 가능 하다. (요청1개 응답1개)
+    // [return]을 붙여 사용할 수 도 있다. 예시)return res.send();
+    // return 을 작성시에는 return 이후 코드는 실행 되지 않는다. 
     res.status(200).send('status(상태번호) 는 생략 가능하다.');
 
 });

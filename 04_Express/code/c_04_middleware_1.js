@@ -2,12 +2,6 @@
     미들웨어         : app.use((req, res, ⭐️next⭐️) => { ⭐️next()⭐️ });  
     에러 처리 미들웨어 : app.use((⭐️err⭐️, req, res, next) => {});
 
-    app.use(미들웨어), app.특정메서드 로 사용된다.
-    위에서 아래로 실행된다.
-    매개변수에 꼭 next 가 포함되어있어야 한다.
-    만약 모든 메서드 또는 특정 url에 동일한 코드가 실행되어야할때 미들웨어를 사용 한다.
-    중복 코드를 없앨 수 있다.
-
     app.use((req, res, next) => { next() });            : 모든 메서드에서 실행
     app.use('/abc', (req, res, next) => { next() });    : url이 /abc로 시작하는 요청에서 미들웨어 실행
     app.메서드('/', (req, res, next)) => { next() });     : 특정 메서드 요청에서 미들웨어를 실행 (get, post..)
