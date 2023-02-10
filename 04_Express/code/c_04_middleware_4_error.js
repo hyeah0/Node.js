@@ -13,8 +13,11 @@ app.get('/throwError',(req, res, next)=>{
 })
 
 app.get('/errorHandle',(req, res, next)=>{
-    console.log(abcde);
-    next(error);             
+    try{
+        console.log(abcde);
+    }catch(error){
+        next(error);             
+    }
 })
 
 // 에러 핸들링
@@ -24,6 +27,7 @@ app.use((error, req, res, next)=>{
     // /errorHandle >>> ReferenceError: abcde is not defined
     console.error(error);
 
+    // 따로 status() 상태를 지정하지 않으면 200으로 반환된다.
     res.status(500).send('Sorry, try later!');
 })
 
