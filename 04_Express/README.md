@@ -49,35 +49,6 @@ app.use('/posts',function(request, response, next){
 app.listen(8080)
 ```
 
-## - route
+## - 미들웨어 상세
 
-- Url/Path을 경로 표시시 중복되는 코드를 줄이기 위함
-
-```
-// c_route.js ---------------------------------------
-// 경로가 지정된 파일을 가져오기
-import postRouter from './router/post.js';  // 설정된 router 가져오기
-import userRouter from './router/user.js';
-
-// 큰 도메인 설정
-app.use('/posts', postRouter);
-app.use('/users', userRouter);
-
-// ./router/post.js  --------------------------------
-import express from 'express';
-
-const router = express.Router();
-
-router.get('/', (req, res) => {
-  res.status(201).send('GET: /posts');
-});
-
-export default router;
-
-// ---------------------------------------------------
-// localhost:8080/posts/ >>> status 201 반환 하고 화면에는 GET: /posts 가 출력된다.
-
-```
-
-- [상세 c_route.js 코드](https://github.com/hyeah0/Node.js/blob/main/04_Express/code/c_route.js)
-- [상세 post.js 코드](https://github.com/hyeah0/Node.js/blob/main/04_Express/code/router/post.js)
+- [미들웨어 상세 정리](https://github.com/hyeah0/Node.js/blob/main/04_Express/READ_middleware.md)

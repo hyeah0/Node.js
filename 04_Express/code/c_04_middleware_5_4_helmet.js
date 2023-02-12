@@ -7,17 +7,17 @@
 
 import express from 'express';
 import cors from 'cors';
-//import cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import helmet from 'helmet';   
 
 console.log('cookie-parser')
 const app = express();
 
+app.use(morgan('combined'));
 app.use(cors());
 app.use(express.json()); // body 내용을 보기위해.. req.body
-//app.use(cookieParser);// cookie 정보를 보기 위해
-app.use(morgan('combined'));
+app.use(cookieParser);   // cookie 정보를 보기 위해
 app.use(helmet());
 
 
