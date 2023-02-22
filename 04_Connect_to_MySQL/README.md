@@ -18,7 +18,7 @@
 
 #### 1. `sequelize`, `sequelize-cli`, `mysql2` 패키지 설치
 
-<img src="https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/img/01_npm_download.png" width="100%">
+<img src="https://github.com/hyeah0/Node.js/blob/main/04_Connect_to_MySQL/img/01_npm_download.png" width="100%">
 
 <details>
     <summary><b>패키지 설치</b></summary>
@@ -32,7 +32,7 @@
 
 #### 2. `npx sequelize init` 명령어 호출
 
-<img src="https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/img/02_start_sequelize.png" width="100%">
+<img src="https://github.com/hyeah0/Node.js/blob/main/04_Connect_to_MySQL/img/02_start_sequelize.png" width="100%">
 
 <details>
     <summary><b>명령어 호출</b></summary>
@@ -70,7 +70,7 @@
 
 #### 4. <b>[config]</b> 폴더 <b>[config.json]</b> password, database 수정
 
-<img src="https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/img/03_index.png" width="100%">
+<img src="https://github.com/hyeah0/Node.js/blob/main/04_Connect_to_MySQL/img/03_index.png" width="100%">
 
 - [상세 코드 링크](https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/code/config/config.json)
 
@@ -127,8 +127,8 @@
 
     </details>
 
-    - [상세 코드 링크](<(https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/code/app.js)>)
+    - [상세 코드 링크](https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/code/app.js)
 
 #### 6. 연결 완료!
 
-<img src="https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/img/04_connect.png" width="100%">
+<img src="https://github.com/hyeah0/Node.js/blob/main/04_Connect_to_MySQL/img/04_connect.png" width="100%">
