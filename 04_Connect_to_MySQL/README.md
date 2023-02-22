@@ -62,7 +62,7 @@
 
 </details>
 
-- [상세 코드 링크]()
+- [상세 코드 링크](https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/code/models/index.js)
 - Sequelize : 시퀄라이즈 패키지이자 생성자
 - config/config.json 에서 [env] 데이터 베이스 설정을 불러온 후
   <br> new Sequelize을 통해 MySQL 연결 객체를 생성
@@ -72,7 +72,7 @@
 
 <img src="https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/img/03_index.png" width="100%">
 
-- [상세 코드 링크]()
+- [상세 코드 링크](https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/code/config/config.json)
 
 #### 5. <b>seqelize</b>를 통해 <b>MySQL과 Express 연결</b>
 
@@ -127,7 +127,7 @@
 
     </details>
 
-    - [상세 코드 링크]()
+    - [상세 코드 링크](<(https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/code/app.js)>)
 
 #### 6. 연결 완료!
 
