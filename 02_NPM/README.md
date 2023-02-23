@@ -21,7 +21,7 @@ major . minor . patch
 
 ## - NPM 생성
 
-1. 터미널에 `npt init --yes` 작성
+1. 터미널에 `npm init --yes` 작성
 2. package.json 파일이 생성
 
 ## - NPM 다운로드
@@ -55,12 +55,15 @@ major . minor . patch
 - `npm un 라이브러리이름`
 
 ## - package-lock.json 삭제
+
 - `rm -rf package-lock.json`
 
 ## - node-modules 삭제
+
 - `rm -rf node-modules`
 
 ## - npm 모듈 재설치
+
 - `npm install`
 
 ## - NPM 라이브러리 업데이트
@@ -79,17 +82,3 @@ major . minor . patch
       "nodemon": "^2.0.20"
   }
   ```
-
-## - 추천 라이브러리
-
-### - nodemon
-
-- `npm view nodemon` >>> node를 끊임없이 동작하면서 파일변경시 재시작
-- 순서
-  1. 터미널에 `npm init --yes`
-  2. `npm i nodemon` 다운
-  - 전역 다운시 `npm i nodemon -g`
-  3. package.json 파일 "scripts" 에 "start" 기입
-     <br> `"start" : "nodemon 실행파일명"`
-  4. `npm start` 입력
-  5. 3번단계에서 입력했던 실행파일이 업데이트 될때마다 자동으로 재시작 된다.
