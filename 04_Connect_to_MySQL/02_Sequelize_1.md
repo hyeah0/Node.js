@@ -2,7 +2,7 @@
 
 1. 패키지 설치 및 MySQl연결(1~6)
 2. 모델 정의(7~8)
-3. CRUD
+3. [CRUD](https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/02_Sequelize_2_CRUD.md)
 
 ### 1. `sequelize`, `sequelize-cli`, `mysql2` 패키지 설치
 

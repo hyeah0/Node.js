@@ -1,0 +1,17 @@
+{
+  "name": "code_notusesequelize",
+  "version": "1.0.0",
+  "description": "시퀄라이즈를 사용하지 않고 MySQL연결하기",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
