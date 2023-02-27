@@ -39,11 +39,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for user in users %}
                     <tr>
-                        <td>테스트</td>
-                        <td>김아무개</td>
-                        <td>20</td>
-                        <td>미혼</td>
+                        <td>{{user.id}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.age}}</td>
+                        <td>{{'기혼' if user.married else '미혼'}}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>테스트2</td>
+                        <td>이아무개</td>
+                        <td>35</td>
+                        <td>기혼</td>
                     </tr>
                 </tbody>
             </table>
@@ -103,6 +111,6 @@
     <!-- axios를 통한 비동기 처리 -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     
-    <script src="../resource/js/sequelize.js"></script>
+    <script src="../public/sequelize.js"></script>
 </body>
 </html>
