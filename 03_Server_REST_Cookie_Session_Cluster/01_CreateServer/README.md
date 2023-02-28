@@ -9,6 +9,13 @@
 
 6. [html 파일읽기](https://github.com/hyeah0/Node.js/blob/main/03_Server_REST_Cookie_Session_Cluster/01_CreateServer/server2.js)
 
+7. [req.on('data',(chunk)=>{}), req.on('end',()=>{}) 1, 동기 비동기](https://github.com/hyeah0/Node.js/blob/main/03_Server_REST_Cookie_Session_Cluster/01_CreateServer/server3_req_on.js)
+
+   - post로 받은 데이터 파일에 저장
+
+8. [req.on('data',(chunk)=>{}), req.on('end',()=>{}) 2(드림코딩)](https://github.com/hyeah0/Node.js/blob/main/03_Server_REST_Cookie_Session_Cluster/01_CreateServer/dreamCodingCode/3-json.js)
+   - json 형태로 반환
+
 ## 1. 서버생성
 
 ```

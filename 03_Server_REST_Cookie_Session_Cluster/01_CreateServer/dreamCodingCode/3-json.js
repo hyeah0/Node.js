@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
   
     if (method === 'GET') {
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(courses));
+      res.end(JSON.stringify(courses)); // JS 형식의 객체를 Json 형식으로 변환
   
     } else if (method === 'POST') {
       
@@ -32,7 +32,7 @@ const server = http.createServer((req, res) => {
       // 모든 데이터가 받아지면 실행
       req.on('end', () => {
         const bodyStr = Buffer.concat(body).toString();
-        const course = JSON.parse(bodyStr);
+        const course = JSON.parse(bodyStr); // Json 형식의 문자열을 Js 객체로 변환
         courses.push(course);
         console.log(course);
         
