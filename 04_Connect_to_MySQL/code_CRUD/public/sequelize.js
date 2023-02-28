@@ -142,16 +142,35 @@ async function getComment(id){
 /* --------------------------------------------------------------------------------- */
 // 사용자 등록 시
 /* --------------------------------------------------------------------------------- */
-let user_form = document.querySelector('#user-form')
+let user_form = document.querySelector('#user-form');
+let ckMarried = 0;
+console.log(user_form);
+
+document.querySelector('#userMarried').addEventListener('click',(e)=>{
+    console.log(document.querySelector('#userMarried').checked);
+})
+//let married = document.querySelector('#userMarried');
 user_form.addEventListener('submit', async (e) =>{
+
+    console.log('-- sequelize.js 사용자 등록 버튼 누름 --');
     
+    if(document.querySelector('#userMarried').checked){
+        console.log('married에 체크되어있습니다. 1반환');
+        ckMarried = 1;
+    }
+
     // 이벤트 기본동작 실행 막기
     // url 이동 막기
     e.preventDefault();
 
     const name = e.target.userName.value;
     const age = e.target.userAge.value;
-    const married = e.target.userMarried.value;
+    const married = ckMarried;
+    //const married = e.target.userMarried.value;
+
+    console.log(e.target.userName.value);
+    console.log(e.target.userAge.value);
+    console.log(married);
 
     if(!name){
         return alert('이름을 입력하세요');
@@ -163,6 +182,7 @@ user_form.addEventListener('submit', async (e) =>{
     try{
         await axios.post('/users', {name, age, married});
         getUser();
+
     }catch(err){
         console.error(err);
     }

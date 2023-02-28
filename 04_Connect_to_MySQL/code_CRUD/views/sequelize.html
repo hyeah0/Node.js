@@ -5,7 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../resource/css/style.css">
+    <!-- <link rel="stylesheet" href="../resource/css/style.css"> -->
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        div{
+            margin: 10px;
+        }
+        fieldset{
+            max-width: 700px;
+        }
+        table{
+            width: 100%;
+            max-width: 700px;
+            border-collapse: collapse;
+        }
+        th, td{
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+
+        .container{
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .resultTab{
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* -- 버튼 구역 -- */
+        .btn_area{
+            height: 30px;
+        }
+        .btn{
+            background-color: transparent;
+            padding: 5px 20px 5px 20px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+
+        .btn:hover{
+            background-color: rgb(220, 195, 199);
+            font-weight: bold;
+            border: 2px solid black;
+        }
+
+        /* 댓글 결과 테이블 수정, 삭제 버튼 구역 */
+        .cmt_Tbody tr td:nth-child(4),
+        .cmt_Tbody tr td:nth-child(5){
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -17,8 +74,8 @@
                     <div><input id="userName" type="text" placeholder="이름"></div>
                     <div><input id="userAge" type="number" placeholder="나이"></div>
                     <div>
-                        <input id="userMarried" type="checkbox" id="married">
-                        <label for="married">결혼 여부</label>
+                        <input id="userMarried" type="checkbox">
+                        <label for="userMarried">결혼 여부</label>
                     </div>
                     <div class="btn_area">
                         <input type="submit" class="btn user_btn"value="등록">
@@ -47,12 +104,6 @@
                         <td>{{'기혼' if user.married else '미혼'}}</td>
                     </tr>
                     {% endfor %}
-                    <tr>
-                        <td>테스트2</td>
-                        <td>이아무개</td>
-                        <td>35</td>
-                        <td>기혼</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -111,6 +162,6 @@
     <!-- axios를 통한 비동기 처리 -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     
-    <script src="../public/sequelize.js"></script>
+    <script src="/sequelize.js"></script>
 </body>
 </html>
