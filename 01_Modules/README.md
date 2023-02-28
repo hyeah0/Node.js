@@ -25,6 +25,16 @@
       <th>코드링크</th>
     </tr>
     <tr>
+      <td>http</td>
+      <td>서버를 생성하거나 http 요청 및 응답 작업</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>https</td>
+      <td>모든 데이터를 암호화 되는 서버를 생성</td>
+      <td>-</td>
+    </tr>
+    <tr>
       <td>os</td>
       <td>운영체제 및 관련 유틸리티에 대한 메서드와 프로퍼티 정보 확인</td>
       <td>

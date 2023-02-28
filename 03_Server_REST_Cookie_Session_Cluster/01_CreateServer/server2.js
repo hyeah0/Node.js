@@ -5,11 +5,16 @@ http.createServer(async (req, res) => {
   try {
     const data = await fs.readFile('./server2.html');
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(data);
+    
+    res.write(data);
+    res.end();
+
   } catch (err) {
     console.error(err);
     res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
-    res.end(err.message);
+   
+    res.write(err.message);
+    res.end();
   }
 })
   .listen(8081, () => {

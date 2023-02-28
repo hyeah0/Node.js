@@ -2,23 +2,8 @@ const http = require('http');
 const fs = require('fs');
 // const http2 = require('http2'); // https
 
-// 서버생성
-// http.createServer((request, response))=>{})
 const server = http.createServer((req, res) => {
   
-  console.log('incoming...');
-  
-  console.log(req.headers);       // header 정보 확인
-  console.log(req.httpVersion);   // 1.1
-  console.log(req.method);        // GET
-  console.log(req.url);           // /favicon.ico
- 
-  // 서버에 반응하기
-  // res.write('hi');
-  // res.end();
-
-  // url에 따라 다르게 반응하기
-  // url가져오기
   const url = req.url;
   res.setHeader('Content-Type', 'text/html');
   
