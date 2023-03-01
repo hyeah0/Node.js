@@ -57,3 +57,11 @@ const inputComment = await sequelize.query(sql, {
     replacements: [commenter, comment],
 })
 ```
+
+### - MySQL AUTO_INCREMENT 초기화
+
+```
+ALTER TABLE db명.테이블명 AUTO_INCREMENT = 초기화할 숫자;
+
+ALTER TABLE nodejs.users AUTO_INCREMENT = 1;
+```
