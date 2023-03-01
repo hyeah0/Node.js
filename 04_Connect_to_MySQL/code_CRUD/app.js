@@ -22,7 +22,7 @@ sequelize.sync({force: false})
     .catch((err)=>{console.error(err);});
 
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));    // 정적파일 연결
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
