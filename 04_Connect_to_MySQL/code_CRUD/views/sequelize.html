@@ -5,71 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="../resource/css/style.css"> -->
-    <style>
-        *{
-            margin: 0px;
-            padding: 0px;
-            box-sizing: border-box;
-            font-family: sans-serif;
-        }
-        div{
-            margin: 10px;
-        }
-        fieldset{
-            max-width: 700px;
-        }
-        table{
-            width: 100%;
-            max-width: 700px;
-            border-collapse: collapse;
-        }
-        th, td{
-            border: 1px solid black;
-            padding: 5px;
-        }
-
-
-        .container{
-            max-width: 700px;
-            margin: auto;
-        }
-
-        .resultTab{
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        /* -- 버튼 구역 -- */
-        .btn_area{
-            height: 30px;
-        }
-        .btn{
-            background-color: transparent;
-            padding: 5px 20px 5px 20px;
-            border-radius: 5px;
-            border: 1px solid black;
-        }
-
-        .btn:hover{
-            background-color: rgb(220, 195, 199);
-            font-weight: bold;
-            border: 2px solid black;
-        }
-
-        /* 댓글 결과 테이블 수정, 삭제 버튼 구역 */
-        .cmt_Tbody tr td:nth-child(4),
-        .cmt_Tbody tr td:nth-child(5){
-            text-align: center;
-        }
-
-        #user-list tbody td:nth-child(1){
-            color: blue;
-        }
-        #user-list tbody td:nth-child(1):hover{
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
@@ -149,7 +85,15 @@
                     </tr>
                 </thead>
                 <tbody class="cmt_tbody">
-        
+                    {% for comment in comments %}
+                    <tr>
+                        <td>{{comment.commenter}}</td>
+                        <td>{{comment.name}}</td>
+                        <td>{{comment.comment}}</td>
+                        <td><button>수정</button></td>
+                        <td><button>삭제</button></td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

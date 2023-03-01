@@ -49,7 +49,14 @@ th, td{
 }
 
 /* 댓글 결과 테이블 수정, 삭제 버튼 구역 */
-.cmt_Tbody tr td:nth-child(4),
-.cmt_Tbody tr td:nth-child(5){
+.cmt_tbody tr td:nth-child(4),
+.cmt_tbody tr td:nth-child(5){
     text-align: center;
+}
+
+#user-list tbody td:nth-child(1){
+    color: blue;
+}
+#user-list tbody td:nth-child(1):hover{
+    font-weight: bold;
 }

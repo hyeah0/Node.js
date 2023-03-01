@@ -14,3 +14,8 @@
 - MariaD , PostgreSQL, SQLite, MSQL 등 다른 데이터 베이스와 같이 쓸 수 있다.
   - 다른 SQL 데이터베이스로 전환시에 편리
 - [Sequelize 공식문서](https://sequelize.org/docs/v6/)
+
+<br>
+<img src="https://github.com/hyeah0/Node.js/blob/main/04_Connect_to_MySQL/img/crud1.png" width="100%">
+
+- [Sequelize CRUD 코드 참고](https://github.com/hyeah0/Node.js/tree/main/04_Connect_to_MySQL/code_CRUD)

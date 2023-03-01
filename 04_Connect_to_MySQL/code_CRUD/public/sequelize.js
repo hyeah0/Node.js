@@ -54,8 +54,6 @@ async function getUser(){
                 row.appendChild(td);
 
             tbody.appendChild(row);
-
-            getComment(0);
         });
     }catch(err){
         console.error(err);
@@ -68,12 +66,6 @@ async function getUser(){
 async function getComment(id){
     console.log('[ ---------- sequelize.js getCooment(id) : 댓글 로딩 함수 ---------- ]')
     try{
-        
-        // if(id==0){  // 전체 댓글 가져오기
-
-        // }else{
-
-        // }
         const res = await axios.get(`/users/${id}/comments`);
         const comments = res.data;
         console.log('가져온 데이터');
@@ -147,13 +139,6 @@ async function getComment(id){
         console.error(err);
     }
 }
-
-
-
-/* --------------------------------------------------------------------------------- */
-// 댓글 삭제
-/* --------------------------------------------------------------------------------- */
-// 
 
 /* --------------------------------------------------------------------------------- */
 // 사용자 등록 시
