@@ -4,14 +4,12 @@ console.log('sequelize.js');
 // 이벤트 : 사용자 이름을 눌렀을때 댓글 로딩
 /* --------------------------------------------------------------------------------- */
 let user_list_tr = document.querySelectorAll('#user-list tbody tr');
-console.log(user_list_tr);
 
 user_list_tr.forEach((el)=>{
     el.addEventListener('click',function(){
-        console.log('클릭한 엘레먼트는? ')
-        console.log(el);
         const id = el.querySelector('td').textContent;
-        //getComment(id);
+        console.log(`클릭한 id는 >>> ${id}`);
+        getComment(id);
     })
 })
 
@@ -25,7 +23,7 @@ async function getUser(){
         console.log('------- users -------');
         console.log(users);
 
-        const tbody = document.querySelector('#user-list tbody');
+        const tbody = document.querySelector('.usr_tbody');
         tbody.innerHTML = '';
 
         users.map(function(user){
@@ -57,7 +55,7 @@ async function getUser(){
 
             tbody.appendChild(row);
 
-
+            getComment(0);
         });
     }catch(err){
         console.error(err);
@@ -65,16 +63,27 @@ async function getUser(){
 }
 
 /* --------------------------------------------------------------------------------- */
-// 댓글 로딩 함수 (getComment(id))
+// 특정 댓글 로딩 함수 (getComment(id))
 /* --------------------------------------------------------------------------------- */
 async function getComment(id){
+    console.log('[ ---------- sequelize.js getCooment(id) : 댓글 로딩 함수 ---------- ]')
     try{
+        
+        // if(id==0){  // 전체 댓글 가져오기
+
+        // }else{
+
+        // }
         const res = await axios.get(`/users/${id}/comments`);
         const comments = res.data;
-        const tbody = document.querySelector('#comment-list tbody');
+        console.log('가져온 데이터');
+        console.log(comments);
+
+        const tbody = document.querySelector('.cmt_tbody');
         tbody.innerHTML = '';
 
         comments.map(function(comment){
+            console.log(comment);
             // 로우 추가
             const row = document.createElement('tr');
             
@@ -85,7 +94,7 @@ async function getComment(id){
 
                 // 이름
                 td = document.createElement('td');
-                td.textContent = comment.User.name;
+                td.textContent = comment.name;
                 row.appendChild(td);
 
                 // 댓글
@@ -93,37 +102,37 @@ async function getComment(id){
                 td.textContent = comment.comment;
                 row.appendChild(td);
 
-                // 수정 버튼 + 이벤트 설정
+                // 수정 버튼
                 const edit = document.createElement('button');
                 edit.textContent = '수정';
-                edit.addEventListener('click', async ()=>{
-                    // 바꿀 내용 입력 받기 + 공란일 경우 alert
+                edit.addEventListener('click', async () => { // 수정 클릭 시
                     const newComment = prompt('바꿀 내용을 입력하세요');
-                    if(!newComment){
-                        return alert('내용을 반드시 입력해야합니다.');
+                    if (!newComment) {
+                      return alert('내용을 반드시 입력하셔야 합니다');
                     }
-                    //
-                    try{
-                        await axios.patch(`comments/${comment.id}`, { comment: newComment});
+
+                    try {
+                        console.log(`commentid : ${comment.cmtCreatedId}`);
+                        await axios.patch(`/comments/${comment.cmtCreatedId}`, { comment: newComment });
                         getComment(id);
-                    }catch(err){
+                    } catch (err) {
                         console.error(err);
                     }
                 });
-
-                // 삭제 버튼 + 이벤트 설정
+           
+                // 삭제 버튼 
                 const remove = document.createElement('button');
                 remove.textContent = '삭제'
                 remove.addEventListener('click', async () => {
                     try{
-                        await axios.delete(`/comments/${comment.id}`);
+                        await axios.delete(`/comments/${comment.cmtCreatedId}`);
                         getComment(id);
                     }catch(err){
                         console.error(err);
                     }
                 });
 
-                // 수정, 삭제 버튼 td에 추가
+                // 수정 + 삭제 버튼 td안에 위치
                 td = document.createElement('td');
                 td.appendChild(edit);
                 row.appendChild(td);
@@ -139,23 +148,22 @@ async function getComment(id){
     }
 }
 
+
+
+/* --------------------------------------------------------------------------------- */
+// 댓글 삭제
+/* --------------------------------------------------------------------------------- */
+// 
+
 /* --------------------------------------------------------------------------------- */
 // 사용자 등록 시
 /* --------------------------------------------------------------------------------- */
 let user_form = document.querySelector('#user-form');
-let ckMarried = 0;
-console.log(user_form);
 
-document.querySelector('#userMarried').addEventListener('click',(e)=>{
-    console.log(document.querySelector('#userMarried').checked);
-})
-//let married = document.querySelector('#userMarried');
 user_form.addEventListener('submit', async (e) =>{
 
-    console.log('-- sequelize.js 사용자 등록 버튼 누름 --');
-    
+    let ckMarried = 0;
     if(document.querySelector('#userMarried').checked){
-        console.log('married에 체크되어있습니다. 1반환');
         ckMarried = 1;
     }
 
@@ -166,11 +174,6 @@ user_form.addEventListener('submit', async (e) =>{
     const name = e.target.userName.value;
     const age = e.target.userAge.value;
     const married = ckMarried;
-    //const married = e.target.userMarried.value;
-
-    console.log(e.target.userName.value);
-    console.log(e.target.userAge.value);
-    console.log(married);
 
     if(!name){
         return alert('이름을 입력하세요');
@@ -197,9 +200,13 @@ user_form.addEventListener('submit', async (e) =>{
 /* --------------------------------------------------------------------------------- */
 let comment_form = document.querySelector('#comment-form');
 comment_form.addEventListener('submit', async (e)=>{
+    
+    console.log('[ ---------- sequelize.js 댓글 등록 ---------- ]')
+    
     e.preventDefault();
-    const id = e.target.commenterId.value;
+    const id = parseInt(e.target.commenterId.value);
     const comment = e.target.comment.value;
+    console.log(`${id} : ${comment}`);
 
     if(!id){
         return alert('아이디를 입력하세요');
@@ -209,8 +216,9 @@ comment_form.addEventListener('submit', async (e)=>{
     }
 
     try{
-        await axios.post('/comments',{id,cooment});
+        await axios.post('/comments', {id,comment});
         getComment(id);
+
     }catch(err){
         console.error(err);
     }

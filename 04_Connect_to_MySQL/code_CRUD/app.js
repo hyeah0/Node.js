@@ -6,7 +6,7 @@ const nunjucks = require('nunjucks');
 const { sequelize } = require('./models');
 const indexRouter = require('./routes');
 const usersRouter = require('./routes/users');
-//const commentsRouter = require('./routes/comments');
+const commentsRouter = require('./routes/comments');
 
 const app = express();
 app.set('port', process.env.PORT || 3001);
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);              // url 주소가 /* 은 indexRouter 실행
 app.use('/users', usersRouter);         // url 주소가 /users 은 userRouter 실행
-//app.use('/comments', commentsRouter);  // url 주소가 /comments/* 은 commentRouter 실행
+app.use('/comments', commentsRouter);   // url 주소가 /comments/* 은 commentRouter 실행
 
 // url이 [/], [/users], [/comments] 세가지에 해당하지 않을 경우
 app.use((req, res, next)=>{

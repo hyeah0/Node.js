@@ -62,6 +62,13 @@
         .cmt_Tbody tr td:nth-child(5){
             text-align: center;
         }
+
+        #user-list tbody td:nth-child(1){
+            color: blue;
+        }
+        #user-list tbody td:nth-child(1):hover{
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -72,7 +79,7 @@
                 <fieldset>
                     <legend>사용자 등록</legend>
                     <div><input id="userName" type="text" placeholder="이름"></div>
-                    <div><input id="userAge" type="number" placeholder="나이"></div>
+                    <div><input id="userAge" type="number" min="0" placeholder="나이"></div>
                     <div>
                         <input id="userMarried" type="checkbox">
                         <label for="userMarried">결혼 여부</label>
@@ -95,7 +102,7 @@
                         <th>결혼</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="usr_tbody">
                     {% for user in users %}
                     <tr>
                         <td>{{user.id}}</td>
@@ -141,18 +148,8 @@
                         <th>삭제</th>
                     </tr>
                 </thead>
-                <tbody class="cmt_Tbody">
-                    <tr>
-                        <td>테스트</td>
-                        <td>김아무개</td>
-                        <td>댓글</td>
-                        <td>
-                            <button>수정</button>
-                        </td>
-                        <td>
-                            <button>삭제</button>
-                        </td>
-                    </tr>
+                <tbody class="cmt_tbody">
+        
                 </tbody>
             </table>
         </div>

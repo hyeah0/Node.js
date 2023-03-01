@@ -13,7 +13,6 @@ router.get('/',async(req, res, next)=>{
         const users = await sequelize.query(query, { type: QueryTypes.SELECT }); 
         console.log('---------------------------------------------------------');
         console.log('routes/index.js')
-        console.log(users);
         console.log('---------------------------------------------------------');
         res.render('sequelize', {users} );
 
