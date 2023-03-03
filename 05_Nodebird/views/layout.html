@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link rel="stylesheet" href="../public/main.css">
-    <!-- <link rel="stylesheet" href="/main.css"> -->
+    <link rel="stylesheet" href="/main.css">
 </head>
 <body>
     <div class="container">
@@ -48,9 +47,11 @@
                             <input id="password" type="password" name="password" required>
                         </div>
                         <div class="input-btn-group">
+                            <div>
+                                <button id="login" type="submit" class="btn">로그인</button>
+                                <a id="kakao" href="/auth/kakao" class="btn">카카오</a>
+                            </div>
                             <a id="join" href="/join" class="btn">회원가입</a>
-                            <button id="login" type="submit" class="btn">로그인</button>
-                            <a id="kakao" href="/auth/kakao" class="btn"></a>
                         </div>
                     </form>
                 </div>

@@ -1,11 +1,217 @@
+/* -- 테스트용 -- */
+/* .container{
+    border: 1px solid pink;
+}
+
+.profile-wrap{
+    border: 1px solid green;
+} */
+
+/* 오른쪽 부분 */
+/* .timeline{
+    background-color: pink;
+} */
+/* 
+.hashtag-search{
+    background-color: orange;
+} */
+
+/* 회원가입 */
+/* #join-form{
+    background-color: aliceblue;
+} */
+
+/* -------------------------- */   
+:root{
+    --box_shodow : rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    --box_shodow_point : rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    --box_shodow_block : rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    --bold-point-color : #401C8C;
+    --pale-color : #928FA6;
+}
+
+/*
+    #401C8C : deep pupple
+    #928FA6 : milky pupple
+    #75A62D : green
+    #CBD99A : pale green
+    #D9D9D9 : gray
+ */
+
 *{
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-}
-
-html, body{
+    font-family: sans-serif;
     margin: 0;
     padding: 0;
-    height: 100%;
+}
+
+body{
+    width: 100%;
+    padding: 20px;
+    height: 100vh;
+}
+
+.container{
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* 화면 600px 이상부터 적용 */
+@media screen and (min-width: 750px){
+    .container{
+        display: flex;
+    }
+
+    .profile-wrap{
+        height: 270px;
+    }
+}
+
+/* ------------------------------
+    컨테이너 오른쪽 부분 
+   ------------------------------ */
+.timeline{
+    width: 100%;
+    height: 100vh;
+}
+
+/* ------------------------------
+    버튼 공통
+   ------------------------------ */
+.btn{
+    padding: 5px 15px 5px 15px;
+    
+    /* button */
+    border: none;   
+    background-color: transparent;
+    
+    /* a */
+    color: var(--pale-color);
+    text-decoration: none;  
+
+    box-shadow: var(--box_shodow);
+    font-size: medium;
+
+    border-radius: 10px;
+}
+
+.btn:hover{
+    color: var(--bold-point-color);
+    font-weight: bold;
+    box-shadow: var(--box_shodow_point);
+}
+
+/* ------------------------------
+    input 공통
+   ------------------------------ */
+.input-group{
+    margin-bottom: 20px;
+}
+
+input{
+    padding: 10px 5px 10px 5px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    box-shadow: var(--box_shodow);
+    background-color: transparent;
+}
+
+input:focus{
+    box-shadow: var(--box_shodow_point);
+}
+
+
+/* ------------------------------ 
+   layout 
+   ------------------------------ */
+.profile-wrap{
+    width: 100%;
+    max-width: 300px;
+
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: var(--box_shodow_block);
+    border-radius: 20px;
+}
+
+#login-form .input-group{
+    display: flex;
+    flex-direction: column;
+}
+
+#login-form .input-group label{
+    margin-bottom: 10px;
+}
+
+#login-form .input-group input{
+    width: 100%;
+}
+
+.input-btn-group{
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-btn-group div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.input-btn-group a,
+.input-btn-group button{
+    margin: 5px;
+    text-align: center;
+}
+
+/* ------------------------------ 
+   main 
+   ------------------------------ */
+.hashtag-search{
+    display: flex;
+    justify-content: right;
+}
+
+#hashtag-form input{
+    width: 200px;
+}
+
+/* ------------------------------ 
+   join 
+   ------------------------------ */
+#join-form{
+    width: 80%;
+    max-width: 380px;
+    margin: auto;
+    padding-top: 10px;
+}
+
+#join-form .input-group label{
+    display:inline-block;
+    width: 60px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+#join-form .input-group input{
+    width: 100%;
+    max-width: 300px;
+}
+
+.join-btn-group{
+    display: flex;
+    justify-content: center;
+}
+
+.join-btn-group button{
+    width: 120px;
+}
+
+.join-btn-group button:nth-child(1){
+    margin-right: 20px;
 }
