@@ -10,19 +10,20 @@
 </head>
 <body>
     <div class="container">
+        <!-- layout.html -->
         <div class="profile-wrap">
             <div class="profile">
 
-                <!-- 로그인 된 상태일때 -->
                 {% if user and user.id %}
+                <!-- 로그인 된 상태일때 -->
                 <div class="login-status">
                     <div class="user-name">안녕하세요 {{user.nick + '님'}}!</div>
                     <div class="followers">
-                        <div>
+                        <div class="half">
                             <div>팔로잉</div>
                             <div class="count follwing-count">{{followingCount}}</div>
                         </div>
-                        <div>
+                        <div class="half">
                             <div>팔로워</div>
                             <div class="count follwing-count">{{followerCount}}</div>
                         </div>
@@ -56,10 +57,12 @@
                 {% endif %}
             </div>
             <!-- profile end -->
-        
+
         </div>
-        <!-- profile-wrap end -->
+        <!-- layout.html end -->
+       
         {% block content %}
+
         {% endblock %}
     </div>
     <!-- container end -->
