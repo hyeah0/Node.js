@@ -386,7 +386,7 @@ npx sequelize init
       <tr><td>DATETIME</td><td>DATE</td></tr>
       <tr><th colspan="2">⎯⎯⎯⎯⎯⎯⎯ 제약조건 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯</th></tr>
       <tr><td>INT UNSIGNED</td><td>INTEGER>UNSIGNED</td></tr>
-      <tr><td>NOT NULL</td><td>allowNull: false</td></tr>
+      <tr><td>NOT NULL</td><td>allowNull: false == not null</td></tr>
       <tr><td>UNIQUE</td><td>unique: true</td></tr>
       <tr><td>DEFAULT now()</td><td>defaultValue: Sequelize.NOW</td></tr>
   </table>
