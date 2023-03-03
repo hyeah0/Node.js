@@ -1,0 +1,131 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="timeline">
+        
+        <!-- 로그인 상태일때 트윗 작성 -->
+        {% if user %}
+            <div>
+                <form id="twit-form" action="/post" method="post" enctype="multipart/form-data">
+                    <!-- twit -->
+                    <div class="input-group">
+                        <textarea name="content" id="twit" maxlength="140"></textarea>
+                    </div>
+                    
+                    <!-- 이미지 미리보기 -->
+                    <div class="input-preview">
+                        <img id="img-preview" src="" alt="미리보기" style="display:none;" width="250">
+                        <input id="img-url" type="hidden" name="url"> 
+                    </div>
+                    
+                    <!-- 이미지 업로드 -->
+                    <div>
+                        <label id="img-label" for="img">이미지 업로드</label>
+                        <input id="img" type="file" accept="image/*">
+                        <!-- accept 속성은 서버로 업로드할 수 있는 파일의 타입을 명시합니다. 
+                             image/* : 모든 타입의 이미지 파일이 허용됨.
+                        -->
+                        <button id="twit-btn" type="submit" class="btn">이미지 버튼</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+        
+        <!-- 로그인 & 로그아웃 상태일때  -->
+        <!-- 검색창 -->
+        <div>
+            <form id="hashtag-form" action="/hashtag">
+                <input type="text" name="hashtag" placeholder="태그 검색">
+                <button class="btn">검색</button>
+            </form>
+        </div>
+        
+        <!-- 트윗들 반복 -->
+        {% for twit in twits %}
+            <div class="twit">
+                <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
+                <input type="hidden" value="{{twit.id}}" class="twit-id">
+                <div class="twit-author">{{twit.User.nick}}</div>
+                
+                <!-- 팔로우 리스트에 없는 아이디일 경우 & 본인이 아닐경우 -->
+                {% if not followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
+                    <button class="twit-follow">팔로우 하기</button>
+                {% endif %}
+
+                <div class="twit-content">{{twit.content}}</div>
+
+                <!-- 이미지가 있을 경우 -->
+                {% if twit.img %}
+                    <div class="twit-img">
+                        <img src="{{twit.img}}" alt="섬네일">
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}   
+    
+    </div>
+    <!-- timeline end -->
+{% endblock %} 
+
+{% block script %}
+<script>
+    /* ----------------------------------------------------------- 
+        이미지 변경 될 경우
+    -------------------------------------------------------------- */
+    if(document.getElementById('img')){
+        let img = document.getElementById('img');
+        
+        // 이미지가 변경 될 경우
+        img.addEventListener('change', function(e){
+            
+            console.log('main.html 이미지가 변경 되었습니다.')
+            console.log(this, this.files);
+
+            const formData = new FormData();
+            formData.appen('img', this.files[0]);
+
+            // /post/img formData 주고 해당 데이터를 post 하기
+            // 그리고 응답값을 html 태그 값으로 주기
+            axios.post('/post/img', formData)
+                 .then((res) => {
+                    document.getElementById('img-url').value = res.data.url;
+                    document.getElementById('img-preview').src = res.data.url;
+                    document.getElementById('img-preview').style.display = "inline";
+                 })
+                 .catch((err)=>{
+                    console.error(err);
+                 });
+        }); // img click event end
+    }; // img if end
+
+    /* ----------------------------------------------------------- 
+        팔로우 하기 버튼 클릭
+    -------------------------------------------------------------- */
+    document.querySelectorAll('.twit-follow').forEach(function(tag){
+        
+        // 버튼 한개씩 >> tag
+        tag.addEventListener('click', function(){
+
+            // #my-id = [views]/[layout.html] 폴더에 input hidden으로 있다.
+            const myId = document.querySelector("#my-id");
+            
+            if(myId){
+                const userId = tag.parentNode.querySelector('.twit-user-id').value;
+
+                console.log('main.html 팔로우 버튼 클릭');
+                console.log(`myId : ${myId} / userId : ${userId}`);
+
+                if(userId !== myId.value){
+                    if(confirm('팔로잉 하시겠습니까?')){
+                        axios.post(`/user/${userId}/follow`)
+                             .then(()=>{
+                                location.reload();
+                             })
+                             .catch((err)=>{console.log(err);});
+                    }
+                }
+            }
+        }); // follow button click event end
+    }); // follow button foreach end
+</script>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="../public/main.css">
+    <!-- <link rel="stylesheet" href="/main.css"> -->
+</head>
+<body>
+    <div class="container">
+        <div class="profile-wrap">
+            <div class="profile">
+
+                <!-- 로그인 된 상태일때 -->
+                {% if user and user.id %}
+                <div class="login-status">
+                    <div class="user-name">안녕하세요 {{user.nick + '님'}}!</div>
+                    <div class="followers">
+                        <div>
+                            <div>팔로잉</div>
+                            <div class="count follwing-count">{{followingCount}}</div>
+                        </div>
+                        <div>
+                            <div>팔로워</div>
+                            <div class="count follwing-count">{{followerCount}}</div>
+                        </div>
+                    </div>
+                    <div class="profile-btn">
+                        <input id="my-id" type="hidden" value="{{user.id}}">
+                        <a id="my-profile" href="/profile">내 프로필</a>
+                        <a id="logout" href="/auth/logout">로그아웃</a>
+                    </div>
+                </div>
+                {% else %}
+
+                <!-- 로그아웃된 상태일때 -->
+                <div class="logout-status">
+                    <form id="login-form" action="/auth/login" method="post">
+                        <div class="input-group">
+                            <label for="email">이메일</label>
+                            <input id="email" type="email" name="email" required autofocus>
+                        </div>
+                        <div class="input-group">
+                            <label for="password">비밀번호</label>
+                            <input id="password" type="password" name="password" required>
+                        </div>
+                        <div class="input-btn-group">
+                            <a id="join" href="/join" class="btn">회원가입</a>
+                            <button id="login" type="submit" class="btn">로그인</button>
+                            <a id="kakao" href="/auth/kakao" class="btn"></a>
+                        </div>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+            <!-- profile end -->
+        
+        </div>
+        <!-- profile-wrap end -->
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- container end -->
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        // 로그인 에러날 경우
+        window.onload = ()=>{
+            if(new URL(location.href).searchParams.get('loginError')){
+                alert(new URL(location.href).searchParams.get('loginError'));
+            }
+        };
+    </script>
+    {% block script %}
+    {% endblock %}
+</body>
+</html>

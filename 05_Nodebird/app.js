@@ -9,7 +9,7 @@ const dotenv = require('dotenv');   // .env 파일 읽기위해
 dotenv.config();
 
 // 라우터
-// const pageRouter = require('./routes/page');
+const pageRouter = require('./routes/page');
 
 const app = express();
 app.set('port', process.env.PORT || 8001);
@@ -37,7 +37,7 @@ app.use(session({
 }));
 
 // 라우터 
-// app.use('/', pageRouter);
+app.use('/', pageRouter);
 
 // 404 응답 미들웨어
 app.use((req, res, next)=>{
