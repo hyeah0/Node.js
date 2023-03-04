@@ -26,6 +26,39 @@
     </ul>
 </details>
 <details>
+    <summary><b><a href="">[🗂️models]</a>: 모델파일(테이블)</b></summary>
+    <ul>
+      <li>
+         <a href="">[User.js]</a>
+         : user 테이블
+      </li>
+      <li>
+         <a href="">[Post.js]</a>
+         : post 테이블
+      </li>
+      <li>
+         <a href="">[HashTag.js]</a>
+         : hashtag 테이블
+      </li>
+      <li>시퀄라이즈 관계파악후(associate) 생성
+        <ul>
+          <li>
+            <a href="">[Follow]</a>
+            : 팔로우한 아이디와 팔로잉한 아이디
+          </li>
+          <li>
+            <a href="">[PostHashtag]</a> 
+            <br>👉 모델에 두개 컬럼 생성 
+            <br>• postId : post테이블의 id
+            <br>• hashtagId: hashtag테이블의 id 
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+
+</details>
+<details>
     <summary><b><a href="">[🗂️public]</a>: 정적 파일(ex. css파일)</b></summary>
     <ul>
       <li>aa</li>
