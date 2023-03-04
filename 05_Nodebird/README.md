@@ -54,7 +54,6 @@
           </li>
         </ul>
       </li>
-
     </ul>
 
 </details>
@@ -83,7 +82,7 @@
     </ul>
 </details>
 <details>
-    <summary><b><a href="">app.js</a>: 라이브러리 연결, 포트설정, 에러처리</b></summary>
+    <summary><b><a href="">app.js</a>: 라이브러리 연결, 포트설정, 에러처리, DB와 모델 연결</b></summary>
     <ul>
       <li>aa</li>
     </ul>
@@ -100,7 +99,8 @@
 ### ⭐️ Step By Step
 
 1. package.json 생성
-   <br>
+
+<br>
 
 2. 라이브러리 설치
 
@@ -109,7 +109,8 @@
    - morgan multer dotenv
    - nunjucks
    - nodemon
-     <br>
+
+<br>
 
 3. 폴더생성
 
@@ -117,25 +118,45 @@
    - [routes]
    - [public]
    - [passport]
-     <br>
+
+<br>
 
 4. 파일생성
 
    - [app.js]
    - [.env] : 쿠키 비밀번호 입력
-     <br>
 
-5. [routes]폴더에 [page.js]파일 생성 및 코드 작성(router 작성)
-   <br> [controllers]폴더에 [page.js]파일 셍성 및 코드 작성
+<br>
+
+5. [routes]폴더에 [page.js]파일 생성 (router 작성)
+   <br>[controllers]폴더에 [page.js]파일 생성
 
    - [app.js] >>> [routes/page.js] : page rounter
    - [routes/page.js] >>> [controllers/page.js]
-     <br>
 
-6. [view]폴더 안에 파일들 생성 및 코드 작성
+<br>
+
+6. [view]폴더 안 파일 작성
+
    - [views]
      - [layout.html]
      - [main.html]
      - [profile.html]
      - [join.html]
      - [error.html]
+
+ <br>
+
+7. [models]폴더 안 파일작성
+   - [models]
+     - [User.js]
+     - [Post.js]
+     - [Hashtag.js]
+
+<br>
+
+8. [config]폴더 [config.json]파일 비밀번호 작성
+
+<br>
+
+9. 데이터베이스와 모델을 연결 ([app.js])

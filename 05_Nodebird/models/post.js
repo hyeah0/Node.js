@@ -12,6 +12,9 @@ class Post extends Sequelize.Model{
                 type: Sequelize.STRING(200),
                 allowNull: true,
             },
+            commentid:{
+                type: Sequelize.INTEGER
+            }
         },{
             sequelize,
                 timestamps: true,
@@ -27,7 +30,7 @@ class Post extends Sequelize.Model{
     // PostHashtag 모델 생성
     static associate(db){
         db.Post.belongsTo(db.User);
-        db.Post.belongstoMany(db.Hashtag, {through: 'PostHashtag'});
+        db.Post.belongsToMany(db.Hashtag, {through: 'PostHashtag'});
     }
 }
 

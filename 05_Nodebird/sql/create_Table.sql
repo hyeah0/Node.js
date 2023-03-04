@@ -14,11 +14,16 @@ create table nodebird.post(
 			id int not null auto_increment,
 			content varchar(140) not null,
 			img varchar(200),
-			primary key(id)
+			commentid int not null,
+			primary key(id),
+			CONSTRAINT commentid FOREIGN KEY(commentid)
+		    REFERENCES nodebird.user(id)
+		    ON DELETE CASCADE
 );
 
 -- hashtag table
 create table hashtag(
 	id int auto_increment,
 	title varchar(15) not null unique,
-)
+	primary key(id)
+);
