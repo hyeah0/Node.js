@@ -5,14 +5,19 @@ const path = require('path');
 const session = require('express-session');
 const nunjucks = require('nunjucks');
 
-const dotenv = require('dotenv');   // .env 파일 읽기위해
+const dotenv = require('dotenv');       // .env 파일 읽기위해
+const passport = require('passport');   // 로그인
 dotenv.config();
 
 // 라우터
 const pageRouter = require('./routes/page');
+const authRouter = require('./routes/auth');
+
 const { sequelize } = require('./models');
+const passportConfig = require('./passport');   // == ./passport/index.js
 
 const app = express();
+passportConfig();   // 패스포트 설정
 app.set('port', process.env.PORT || 8001);
 app.set('view engine', 'html');
 
@@ -46,8 +51,13 @@ app.use(session({
     }
 }));
 
+
+app.use(passport.initialize()); // req 객체에 passport 설정
+app.use(passport.session());    // req.session 객체에 passport 정보 저장
+
 // 라우터 
 app.use('/', pageRouter);
+app.use('/auth', authRouter);
 
 // 404 응답 미들웨어
 app.use((req, res, next)=>{

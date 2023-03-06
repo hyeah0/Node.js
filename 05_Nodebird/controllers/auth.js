@@ -6,7 +6,7 @@ const { QueryTypes } = require("sequelize");
 const { sequelize } = require("../models/index");
 
 /* --------------------------------------------------------------------------------------
-    회원 가입 컨트롤러
+    회원 가입 컨트롤러(/auth/join)
  ---------------------------------------------------------------------------------------- */
 exports.join = async(req, res, next) =>{
     const {email, nick, password} = req.body;
@@ -21,16 +21,12 @@ exports.join = async(req, res, next) =>{
             return res.redirect('/join?error=exist');
         }
 
-        // 비밀번호는 암호화 해서 저장
-        // bcrypt 모듈 사용
+        // bcrypt 모듈 : 비밀번호 암호화 해서 저장
         // hash(인수1, 인수2) : 인수1을 인수2 만큼 반복
         const hash = await bcrypt.hash(password, 12);
-        // await User.create({
-        //     email, nick, password: hash,
-        // });
-
-        const inputsql = `insert into users values( default, '${email}', '${nick}', '${hash}', default, '', default, default )`;
-        await sequelize.query(inputsql, { type: QueryTypes.SELECT });
+        await User.create({
+            email, nick, password: hash,
+        });
 
         return res.redirect('/');
 
@@ -41,22 +37,35 @@ exports.join = async(req, res, next) =>{
 }  
 
 /* --------------------------------------------------------------------------------------
-    로그인 컨트롤러
+    로그인 컨트롤러(/auth/login)
+    ① controllers/auth.js
+    ② passport/localStrategy.js
+    ③ controllers/auth.js
+    ④ passport/index.js
+    ⑤ controllers/auth.js
  ---------------------------------------------------------------------------------------- */
- exports.login = (req, res, next) =>{
-    passport.authenticate('local', (authError, user, info)=>{
+ exports.login = (req, res, next) =>{   // ①
+
+    passport.authenticate('local', (authError, user, info) => { 
+    // ③ 
+        console.log('[ ----- controllers/auth.js passport.authenticate -----]');
+        
         // 에러일경우
         if(authError){
             console.error(authError);
             return next(authError);
         }
+
         // 로그인 하지 않은 상태일경우
         if(!user){
             return res.redirect(`/?loginError=${info.message}`);
         }
 
         // [passport/index.js] passport.serializeUser 호출
-        return req.login(user, (loginError) =>{
+        return req.login(user, (loginError) =>{ // ⑤
+
+            console.log('[ ----- controllers/auth.js req.login -----]');
+            
             if(loginError){
                 console.error(loginError);
                 return next(loginError);
@@ -68,7 +77,7 @@ exports.join = async(req, res, next) =>{
  };
 
  /* --------------------------------------------------------------------------------------
-    로그아웃 컨트롤러
+    로그아웃 컨트롤러(/auth/logout)
  ---------------------------------------------------------------------------------------- */
 exports.logout = (req, res) =>{
     req.logout(()=>{
