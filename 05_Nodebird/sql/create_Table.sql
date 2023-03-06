@@ -1,3 +1,4 @@
+-- 시퀄라이즈로 모델생성시 테이블을 따로 생성하지 않아도 된다.
 -- user table
 create table nodebird.user(
             id int not null auto_increment,
