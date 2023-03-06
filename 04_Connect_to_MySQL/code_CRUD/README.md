@@ -48,6 +48,10 @@
 - 시퀄라이즈 직접 sql 작성
 
 ```
+const { QueryTypes } = require("sequelize");
+const { sequelize } = require("../models/index");
+
+
 ⭐️ const sql = `select * from users`;
 const users = await sequelize.query(sql, { type: QueryTypes.SELECT });
 
