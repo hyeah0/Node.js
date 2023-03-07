@@ -1,0 +1,156 @@
+- [카카오 개발자 사이트](https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#unlink)
+- [로그아웃 참고 블로그](https://12ahn22.tistory.com/33)
+
+### 1. [passport/kakaoStrategy.js] : accessToken + 유저정보
+
+- 카카오 로그인 성공시 발급 받는 <b>accessToken</b>을 로그인 성공시 같이 넘겨준다.
+
+<pre>
+    module.exports = () =>{
+        passport.use(new KakaoStrategy(
+            {
+            clientID: process.env.KAKAO_ID,         // 카카오에서 발급해주는 아이디
+            callbackURL: '/auth/kakao/callback',    // 카카오로 부터 인증받을 라우터 주소
+            },
+
+            async (<b>⭐️accessToken⭐️</b>, refreshToken, profile, done ) => {
+                // accessToken : 로그아웃 요청 보내기 위해 필요
+                // profile : 사용자 정보
+
+                try{
+                    // 기존 카카오로 회원가입 회원 확인
+                    const dbUser = await User.findOne({ where: {snsId: profile.id, provider: 'kakao'}});
+
+                    <b>// ⭐️ 유저 정보에 토큰 정보 추가
+                    dbUser.accessToken = accessToken;
+                    </b>
+
+                    if(dbUser){
+                        done(null, dbUser);
+
+                    }else{
+                        const newUser = await User.create({
+                            email: profile._json?.kakao_accout?.email,
+                            nick: profile.displayName,
+                            snsId: profile.id,
+                            provider: 'kakao',
+                        });
+                        done(null, newUser);
+
+                    }
+                }catch(err){
+                    console.error(err);
+                    done(err);
+                }
+            }
+        ));
+</pre>
+
+### 2. [passport/index.js] : serializeUser 수정
+
+1. 카카오 로그인시에는 accessToken 값도 넘어와 <b>토큰도 함께 세션에 저장 필요</b>
+<pre>
+    passport.serializeUser((user, done)=>{
+        console.log('[ ----- passport/index.js __ passport.serializeUser -----]');
+
+        if(user.accessToken){
+            console.log('카카오톡 로그인 유저입니다.');
+            done(null, {id: user.id, <b>accessToken: user.accessToken</b> });  
+        
+        }else{
+            console.log('로컬 로그인 유저입니다.');           
+            done(null, {id: user.id});    // done(에러발생시 사용, 저장하고싶은 데이터 저장)
+        }     
+    });
+</pre>
+
+### 3. [passport/index.js] : deserializeUser 수정
+
+- serializeUser 에서 아이디와 토큰 정보 받아옴(토큰정보는 카카오톡 로그인일 경우에만 해당)
+- userdata.id = user id / userdata.accessToken = accessToken
+<pre>
+passport.deserializeUser((userdata, done) => { 
+       
+        console.log('[ ----- passport/index.js __ passport.deserializeUser -----]');
+        const id = userdata.id;
+
+        User.findOne({where: {id}})
+            .then((user) => {
+
+                if(userdata.accessToken){
+                    console.log('카카오톡 로그인 유저입니다.');
+                    <b>user.accessToken = userdata.accessToken;</b>
+                }
+
+                done(null, user);   // req.user로 로그인한 사용자 정보를 가져올 수 있다.
+            })
+            .catch((error) => done(error)); 
+
+    });
+</pre>
+
+### 3. [controllers/auth.js] : 로그아웃 컨트롤러 수정
+
+- 기존 코드
+
+  ```
+  exports.logout = (req, res) =>{
+      req.logout(()=>{
+          res.redirect('/');
+      });
+  };
+  ```
+
+  - connect.sid 쿠키 삭제 안됨
+  - 카카오톡 로그아웃 안됨
+
+<br>
+
+- 수정 코드
+
+  - npm axios 라이브러리 다운
+
+    ```
+    npm i axios
+    ```
+
+  - <pre>
+    
+    const axios = require('axios');
+    
+    exports.logout = async(req, res, next) =>{
+    
+        console.log('[ ----- controllers/auth.js __ logout ----- ]')
+        <b>
+        // 카카오톡 로그인 유저일 경우
+        const ACCESS_TOKEN = res.locals.user.accessToken;
+    
+        if(ACCESS_TOKEN){
+    
+            try{
+                console.log('카카오톡 로그아웃 실행');
+    
+                let logout = await axios({
+                    method:'post',
+                    url:'https://kapi.kakao.com/v1/user/unlink',
+                    headers:{
+                        'Authorization': `Bearer ${ACCESS_TOKEN}`
+                    }
+                });
+    
+            }catch (error) {
+                console.error(error);
+                next(error);
+            }
+        }
+    
+        // 세션 정리
+        req.session.destroy(() => {
+            res.clearCookie('connect.sid');
+            res.redirect('/');
+        });
+        </b>
+    
+    };
+    
+    </pre>

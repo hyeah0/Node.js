@@ -1,8 +1,8 @@
+/* -------------------------------- */
 /* -- 테스트용 -- */
 /* .container{
     border: 1px solid pink;
 }
-
 .profile-wrap{
     border: 1px solid green;
 } */
@@ -26,17 +26,15 @@
     --box_shodow : rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
     --box_shodow_point : rgba(0, 0, 0, 0.18) 0px 2px 4px;
     --box_shodow_block : rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    --sub-point-color: #75A62D;
+    --sub-pale-color: #CBD99A;
     --bold-point-color : #401C8C;
     --pale-color : #928FA6;
+    --backgroud-color : #3f1c8c29;
+    --backgroud-pale-color : #3f1c8c10;
 }
 
-/*
-    #401C8C : deep pupple
-    #928FA6 : milky pupple
-    #75A62D : green
-    #CBD99A : pale green
-    #D9D9D9 : gray
- */
+/* #D9D9D9 : gray */
 
 *{
     box-sizing: border-box;
@@ -49,14 +47,16 @@
 
 body{
     width: 100%;
-    padding: 20px;
     height: 100vh;
 }
 
 .container{
     width: 90%;
+    min-width: 300px;
     max-width: 1200px;
     margin: auto;
+    padding: 20px;
+    overflow: scroll;
 }
 
 /* 화면 600px 이상부터 적용 */
@@ -75,6 +75,7 @@ body{
    ------------------------------ */
 .timeline{
     width: 100%;
+    min-width: 300px;
     height: 100vh;
 }
 
@@ -111,7 +112,8 @@ body{
     margin-bottom: 20px;
 }
 
-input{
+input,
+textarea{
     padding: 10px 5px 10px 5px;
     outline: none;
     border: none;
@@ -124,12 +126,12 @@ input:focus{
     box-shadow: var(--box_shodow_point);
 }
 
-
 /* ------------------------------ 
    layout 
    ------------------------------ */
 .profile-wrap{
     width: 100%;
+    min-width: 300px;
     max-width: 300px;
 
     margin-right: 20px;
@@ -139,6 +141,53 @@ input:focus{
     border-radius: 20px;
 }
 
+/* ------------------------------ 
+   layout : 로그인 된 상태
+   ------------------------------ */
+.login-status .followers{
+    height: 110px;
+    margin-bottom: 10px; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.login-status .followers .half{
+    width: 45%;
+}
+
+.login-status .followers .half div{
+    padding: 3px 0px 5px 0px;
+    text-align: center;
+} 
+
+.login-status .followers .half div:nth-child(1){
+    font-size: 15px;
+}
+
+.login-status .followers .half div:nth-child(2){
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--sub-pale-color);
+}
+
+.login-status .followers .half div:nth-child(2):hover{
+    color: var(--sub-point-color);
+}
+
+.profile-btn{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.profile-btn a{
+    text-align: center;
+}
+
+/* ------------------------------ 
+   layout : 로그인 안된 상태
+   ------------------------------ */
 #login-form .input-group{
     display: flex;
     flex-direction: column;
@@ -182,6 +231,52 @@ input:focus{
 }
 
 /* ------------------------------ 
+   main : 트윗 작성
+   ------------------------------ */
+#twit-form{
+    padding: 15px;
+    margin-bottom: 20px;
+
+    background-color: var(--backgroud-pale-color);
+    border-radius: 20px;
+    box-shadow: var(--box_shodow_block);
+}
+
+#twit-form textarea{
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+}
+
+.twit-img-upload{
+    display: flex;
+    justify-content: space-between;
+}
+
+.twit-img-upload #img-label{
+    padding: 8px 12px 8px 12px;
+    border-radius: 4px;
+    background-color: #cbd99a9c;
+    color: var(--pale-color);
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.twit-img-upload #img-label:hover{
+    color: var(--bold-point-color);
+    font-weight: bold;
+}
+
+.twit-img-upload #img{
+    display: none;
+}
+
+.twit-img-upload .btn{
+    background-color: #cbd99a9c;
+}
+
+/* ------------------------------ 
    join 
    ------------------------------ */
 #join-form{
@@ -215,3 +310,6 @@ input:focus{
 .join-btn-group button:nth-child(1){
     margin-right: 20px;
 }
+
+/* -------------------------------------------------------------------------- */
+

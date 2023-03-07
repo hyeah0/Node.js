@@ -1,6 +1,6 @@
 const passport = require('passport');
 const local = require('./localStrategy');
-//const kakao = require('./kakaoStrategy');
+const kakao = require('./kakaoStrategy');
 const User = require('../models/user');
 
 /**
@@ -16,21 +16,38 @@ module.exports = ()=>{
 
     passport.serializeUser((user, done)=>{ // ④
         console.log('[ ----- passport/index.js __ passport.serializeUser -----]');
-        console.log(user);
-        console.log(done);
 
-        done(null, user.id);               // done(에러발생시 사용, 저장하고싶은 데이터 저장)
+        if(user.accessToken){
+            console.log('카카오톡 로그인 유저입니다.');
+            done(null, {id: user.id, accessToken: user.accessToken });  
+        
+        }else{
+            console.log('로컬 로그인 유저입니다.');           
+            done(null, {id: user.id});    // done(에러발생시 사용, 저장하고싶은 데이터 저장)
+        }     
     });
   
-    passport.deserializeUser((id, done) => { // serializeUser 에서 user.id를 id로 받아 사용자 정보 조회
+    // serializeUser 에서 아이디와 토큰 정보 받아옴(토큰정보는 카카오톡 로그인일 경우에만 해당) 
+    // userdata.id = user id / userdata.accessToken = accessToken
+    passport.deserializeUser((userdata, done) => { 
+       
         console.log('[ ----- passport/index.js __ passport.deserializeUser -----]');
+        const id = userdata.id;
 
-        // select * from users where id = id
         User.findOne({where: {id}})
-            .then(user => done(null, user)) // req.user로 로그인한 사용자 정보를 가져올 수 있다.
-            .catch(err => done(err));
+            .then((user) => {
+
+                if(userdata.accessToken){
+                    console.log('카카오톡 로그인 유저입니다.');
+                    user.accessToken = userdata.accessToken;
+                }
+
+                done(null, user);   // req.user로 로그인한 사용자 정보를 가져올 수 있다.
+            })
+            .catch((error) => done(error)); 
+
     });
 
     local();
-    //kakao();
+    kakao();
 };

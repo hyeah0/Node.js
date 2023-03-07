@@ -10,7 +10,7 @@
                 <form id="twit-form" action="/post" method="post" enctype="multipart/form-data">
                     <!-- twit -->
                     <div class="input-group">
-                        <textarea name="content" id="twit" maxlength="140"></textarea>
+                        <textarea name="content" id="twit" maxlength="140" rows="9" cols="80"></textarea>
                     </div>
                     
                     <!-- 이미지 미리보기 -->
@@ -20,13 +20,13 @@
                     </div>
                     
                     <!-- 이미지 업로드 -->
-                    <div>
+                    <div class="twit-img-upload">
                         <label id="img-label" for="img">이미지 업로드</label>
-                        <input id="img" type="file" accept="image/*">
+                        <input id="img" type="file" accept="image/*" >
                         <!-- accept 속성은 서버로 업로드할 수 있는 파일의 타입을 명시합니다. 
                              image/* : 모든 타입의 이미지 파일이 허용됨.
                         -->
-                        <button id="twit-btn" type="submit" class="btn">이미지 버튼</button>
+                        <button id="twit-btn" type="submit" class="btn">등록</button>
                     </div>
                 </form>
             </div>
