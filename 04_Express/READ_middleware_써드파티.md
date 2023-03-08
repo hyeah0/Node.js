@@ -7,6 +7,7 @@
     <tr><td>Helmet</td><td>보안에 필요한 header를 추가(HTTP Header 보안 증진)</td></tr>
     <tr><td>CORS</td><td>헤더에 Access-Control-Allow-Orgin 을 추가</td></tr>
     <tr><td>Passport</td><td>클라이언트가 서버에 요청할 자격이 있는지 인증할 때 사용(로그인시 사용)</td></tr>
+    <tr><td>multer</td><td>파일 업로드시 사용</td></tr>
 </table>
 
 - [써드파티 미들웨어 참고 링크](https://blog.bitsrc.io/5-express-middleware-libraries-every-developer-should-know-94e2728f7503)
@@ -117,4 +118,6 @@ res.clearCookie('key', 'value', {
 
 ## 6. Passport
 
-- [Passport 미들웨어 참고 링크](https://inpa.tistory.com/entry/NODE-%F0%9F%93%9A-Passport-%EB%AA%A8%EB%93%88-%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C-%EC%B2%98%EB%A6%AC%EA%B3%BC%EC%A0%95-%F0%9F%92%AF-%EC%9D%B4%ED%95%B4%ED%95%98%EC%9E%90)
+- [passport 로그인 사용 코드](https://github.com/hyeah0/Node.js/blob/main/05_Nodebird/R02_%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%A1%9C%EA%B7%B8%EC%95%84%EC%9B%83.md)
+
+- [Passport 미들웨어 참고 블로그](https://inpa.tistory.com/entry/NODE-%F0%9F%93%9A-Passport-%EB%AA%A8%EB%93%88-%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C-%EC%B2%98%EB%A6%AC%EA%B3%BC%EC%A0%95-%F0%9F%92%AF-%EC%9D%B4%ED%95%B4%ED%95%98%EC%9E%90)
