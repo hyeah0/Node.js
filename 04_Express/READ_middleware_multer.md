@@ -226,3 +226,28 @@ app.post('/upload', ⭐️upload.single('image')⭐️,(req, res)=>{
         res.send('ok');
     });
     ```
+
+#### 4. 파일 업로드 없이 멀티파트 형식으로 업로드 (upload.node)
+
+1.  html
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="text" name="title">
+    <button type="submit">업로드</button>
+</form>
+
+```
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="text" name="title">
+    <button type="submit">업로드</button>
+</form>
+```
+
+2.  upload.none
+
+```
+app.post('/upload', upload.none(), (req,res)=>{
+    console.log(req.body);
+    res.send('ok');
+});
+```
