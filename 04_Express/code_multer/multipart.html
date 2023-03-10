@@ -5,6 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        h1{
+            color: rgb(155, 151, 112);
+        }
+        form{
+            padding-bottom: 30px;
+            border-bottom: 1px solid gray;
+        }
+    </style>
 </head>
 <body>
     <h1>upload.single</h1>
@@ -13,14 +22,14 @@
         <input type="text" name="title">
         <button type="submit">업로드</button>
     </form>
-    <br>
+
     <h1>upload.array</h1>
     <form action="/upload/array" method="post" enctype="multipart/form-data">
         <input type="file" name="many" multiple>
         <input type="text" name="title">
         <button type="submit">업로드</button>
     </form>
-    <br>
+   
     <h1>upload.fields</h1>
     <form action="/upload/fields" method="post" enctype="multipart/form-data">
         <input type="file" name="image1">
@@ -28,7 +37,7 @@
         <input type="text" name="title">
         <button type="submit">업로드</button>
     </form>
-    <br>
+   
     <h1>upload.none</h1>
     <form action="/upload/none" method="post" enctype="multipart/form-data">
         <input type="text" name="title">

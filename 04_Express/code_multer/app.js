@@ -44,6 +44,8 @@ try{
 const upload = multer({
     storage: multer.diskStorage({
         destination(req, file, done){
+            console.log(`multer 설정, 파일 destination : ${req.url} `);
+            
             done(null, 'uploads/');
         },
 
@@ -55,26 +57,46 @@ const upload = multer({
     limits: {fileSize: 5 *1024*1024},
 });
 
-// get      /                   html파일
+// get      /                   
 // get      /upload             html파일
 // post     /upload/single      파일 한개 업로드
 // post     /upload/array       파일 여러개 업로드
 // post     /upload/fields      파일 여러개 업로드(input 여러개)
 // post     /upload/none        파일 업로드 x
-
-
 app.get('/upload', (req, res, next)=>{
-    console.log('get /요청에서만 실행 됩니다.')
     res.sendFile(path.join(__dirname, 'multipart.html'));
 });
 
+// 파일 하나 업로드
 app.post('/upload/single', upload.single('image'), (req, res)=>{
+    console.log('-- upload single ----------------');
     console.log(req.file, req.body);
-    res.send('ok');
+    res.send(`<h1>ok</h2><hr><button onclick="location.href='./'">업로드 페이지로 이동</button>`);
 });
 
+// 파일 여러개 업로드
+app.post('/upload/array', upload.array('many'), (req, res)=>{
+    console.log('-- upload array ----------------');
+    console.log(req.files, req.body);
+    res.send(`<h1>ok</h2><hr><button onclick="location.href='./'">업로드 페이지로 이동</button>`);
+})
+
+// 파일 여러개 업로드(input 여러개)
+app.post('/upload/fields', upload.fields([{name: 'image1'}, {name: 'image2'}]), (req, res)=>{
+    console.log('-- upload fields ----------------');
+    console.log(req.files, req.body);
+    res.send(`<h1>ok</h2><hr><button onclick="location.href='./'">업로드 페이지로 이동</button>`);
+})
+
+// 파일 업로드 x
+app.post('/upload/none', upload.none(), (req, res)=>{
+    console.log('-- upload none ----------------');
+    console.log(req.body);
+    res.send(`<h1>ok</h2><hr><button onclick="location.href='./'">업로드 페이지로 이동</button>`);
+})
+
 app.get('/', (req, res, next)=>{
-    console.log('get /요청에서만 실행 됩니다.')
+    res.send(`<button onclick="location.href='./'">업로드 페이지로 이동</button>`);
     next();
     
 },(req, res)=>{

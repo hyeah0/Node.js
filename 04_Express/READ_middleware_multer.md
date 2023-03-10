@@ -189,7 +189,7 @@ app.post('/upload', ⭐️upload.single('image')⭐️,(req, res)=>{
 
     ```
     app.post('/upload', ⭐️upload.array('many')⭐️, (req, res)=>{
-        console.log(req.file, req.body);
+        console.log(req.files, req.body);
         res.send('ok');
     });
     ```
@@ -222,7 +222,7 @@ app.post('/upload', ⭐️upload.single('image')⭐️,(req, res)=>{
 
     ```
     app.post('/upload', ⭐️upload.fields([{name: 'image1'}, {name: 'image2'}])⭐️, (req, res)=>{
-        console.log(req.file, req.body);
+        console.log(req.files, req.body);
         res.send('ok');
     });
     ```
