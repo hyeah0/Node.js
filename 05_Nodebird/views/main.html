@@ -10,12 +10,12 @@
                 <form id="twit-form" action="/post" method="post" enctype="multipart/form-data">
                     <!-- twit -->
                     <div class="input-group">
-                        <textarea name="content" id="twit" maxlength="140" rows="9" cols="80"></textarea>
+                        <textarea name="content" id="twit" maxlength="140" rows="5" cols="80" required></textarea>
                     </div>
                     
                     <!-- 이미지 미리보기 -->
                     <div class="input-preview">
-                        <img id="img-preview" src="" alt="미리보기" style="display:none;" width="250">
+                        <img id="img-preview" src="" alt="미리보기" style="display:none;" width="150">
                         <input id="img-url" type="hidden" name="url"> 
                     </div>
                     
@@ -46,21 +46,26 @@
             <div class="twit">
                 <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
                 <input type="hidden" value="{{twit.id}}" class="twit-id">
-                <div class="twit-author">{{twit.User.nick}}</div>
-                
-                <!-- 팔로우 리스트에 없는 아이디일 경우 & 본인이 아닐경우 -->
-                {% if not followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
-                    <button class="twit-follow">팔로우 하기</button>
-                {% endif %}
-
-                <div class="twit-content">{{twit.content}}</div>
-
-                <!-- 이미지가 있을 경우 -->
-                {% if twit.img %}
-                    <div class="twit-img">
-                        <img src="{{twit.img}}" alt="섬네일">
+                <div class="twit-group">
+                    <div class="twit-author-group">
+                        <div class="twit-author">{{twit.User.nick}}</div>
+                        
+                        <!-- 팔로우 리스트에 없는 아이디일 경우 & 본인이 아닐경우 -->
+                        {% if not followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
+                            <button class="twit-follow btn">팔로우 하기</button>
+                        {% endif %}
                     </div>
-                {% endif %}
+                    <div class="twit-content-group">
+                        <div class="twit-content">{{twit.content}}</div>
+
+                        <!-- 이미지가 있을 경우 -->
+                        {% if twit.img %}
+                            <div class="twit-img">
+                                <img src="{{twit.img}}" alt="섬네일" width="150">
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         {% endfor %}   
     
@@ -83,7 +88,7 @@
             console.log(this, this.files);
 
             const formData = new FormData();
-            formData.appen('img', this.files[0]);
+            formData.append('img', this.files[0]);
 
             // /post/img formData 주고 해당 데이터를 post 하기
             // 그리고 응답값을 html 태그 값으로 주기

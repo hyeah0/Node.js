@@ -97,6 +97,7 @@ body{
     font-size: medium;
 
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .btn:hover{
@@ -224,6 +225,7 @@ input:focus{
 .hashtag-search{
     display: flex;
     justify-content: right;
+    margin-bottom: 20px;
 }
 
 #hashtag-form input{
@@ -233,13 +235,15 @@ input:focus{
 /* ------------------------------ 
    main : 트윗 작성
    ------------------------------ */
-#twit-form{
+#twit-form, .twit{
     padding: 15px;
     margin-bottom: 20px;
-
-    background-color: var(--backgroud-pale-color);
     border-radius: 20px;
     box-shadow: var(--box_shodow_block);
+}
+
+#twit-form{
+    background-color: var(--backgroud-pale-color);
 }
 
 #twit-form textarea{
@@ -277,6 +281,42 @@ input:focus{
 }
 
 /* ------------------------------ 
+   main : 작성한 트윗
+   ------------------------------ */
+.twit{
+    background-color: #cbd99a9c;
+}
+
+.twit-group{
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: var(--box_shodow);
+}
+
+.twit-author-group{
+    padding: 10px 20px 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.twit-author{
+    font-weight: bold;
+    font-size: large;
+}
+
+.twit-content-group{
+    padding: 0px 20px 0px 20px;
+}
+
+.twit-content{
+    padding-bottom: 10px;
+}
+
+.twit-img{
+    padding-bottom: 10px;
+}
+
+/* ------------------------------ 
    join 
    ------------------------------ */
 #join-form{
@@ -311,5 +351,6 @@ input:focus{
     margin-right: 20px;
 }
 
-/* -------------------------------------------------------------------------- */
+
+
 

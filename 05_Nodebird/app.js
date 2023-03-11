@@ -12,6 +12,7 @@ dotenv.config();
 // 라우터
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
+const postRouter = require('./routes/post');
 
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');   // == ./passport/index.js
@@ -37,6 +38,7 @@ sequelize.sync({force:false})
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
@@ -58,6 +60,7 @@ app.use(passport.session());    // req.session 객체에 passport 정보 저장
 // 라우터 
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
+app.use('/post', postRouter);
 
 // 404 응답 미들웨어
 app.use((req, res, next)=>{
