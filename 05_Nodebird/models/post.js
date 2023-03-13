@@ -12,9 +12,6 @@ class Post extends Sequelize.Model{
                 type: Sequelize.STRING(200),
                 allowNull: true,
             },
-            commentid:{
-                type: Sequelize.INTEGER
-            }
         },{
             sequelize,
                 timestamps: true,

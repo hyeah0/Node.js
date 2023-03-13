@@ -34,14 +34,25 @@ module.exports = ()=>{
         console.log('[ ----- passport/index.js __ passport.deserializeUser -----]');
         const id = userdata.id;
 
-        User.findOne({where: {id}})
+        User.findOne({
+            where: {id},
+            include: [{
+                model: User,
+                attributes: ['id', 'nick'],
+                as: 'Followers',
+            }, {
+                model: User,
+                attributes: ['id', 'nick'],
+                as: 'Followings',
+            }],
+        })
             .then((user) => {
 
                 if(userdata.accessToken){
                     console.log('카카오톡 로그인 유저입니다.');
                     user.accessToken = userdata.accessToken;
                 }
-
+               
                 done(null, user);   // req.user로 로그인한 사용자 정보를 가져올 수 있다.
             })
             .catch((error) => done(error)); 

@@ -1,4 +1,4 @@
-const { Post, HashTag } = require('../models');
+const { Post, Hashtag } = require('../models');
 
 /* ----------------------------------------
     POST    /post/img   파일 업로드
@@ -35,17 +35,20 @@ exports.uploadPost = async (req, res, next) => {
         const hashtags = req.body.content.match(/#[^\s#]*/g);   // ① 작성된 해시태그를 정규 표현식으로 추출 (\s: 공백을 ^: 제외)
 
         if(hashtags){
-            console.log('[ -- controllers.post.js -- ]')
+            console.log('* -------------------------------------------- *');
+            console.log('  controllers.post.js uploadPost 작성한 해시태그');
+            console.log(hashtags);
+            console.log('* -------------------------------------------- *');
+
             const result = await Promise.all(
                 hashtags.map(tag => {
-                    return HashTag.findOrCreate({   // 특정 요소를 검색하거나, 존재하지 않으면 새로 생성
-                        where: { title: tag.slice(1).toLowerCase() },   // ② 해시태그에서 #을 제외하고 소문자로 변경한 값이 있는지 확인
+                    return Hashtag.findOrCreate({   // 특정 요소를 검색하거나, 존재하지 않으면 새로 생성
+                        where: { title: tag.slice(1).toLowerCase() },   // ② 해시태그들 배열 첫번째, 소문자로 변경한 값이 있는지 확인
                     })
                 }),
             );
-            console.log(hashtags);
             
-            await post.addHashtags(result.map(rtag => rtag[0]));    // ③ [모델, boolean] 값에서 모델만 가져오기
+            await post.addHashtag(result.map(rtag => rtag[0]));    // ③ [모델, boolean] 값에서 모델만 가져오기
         }
 
         res.redirect('/');
@@ -55,3 +58,4 @@ exports.uploadPost = async (req, res, next) => {
         next(error);
     }
 };
+
