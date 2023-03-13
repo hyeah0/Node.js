@@ -44,10 +44,10 @@
         <!-- 트윗들 반복 -->
         {% for twit in twits %}
             <div class="twit">
-                <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
-                <input type="hidden" value="{{twit.id}}" class="twit-id">
                 <div class="twit-group">
                     <div class="twit-author-group">
+                        <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
+                        <input type="hidden" value="{{twit.id}}" class="twit-id">
                         <div class="twit-author">{{twit.User.nick}}</div>
                         
                         <!-- 팔로우 리스트에 없는 아이디일 경우 & 본인이 아닐경우 -->
