@@ -36,6 +36,11 @@ body{
     overflow: scroll;
 }
 
+a{
+    color: black;
+    text-decoration: none;
+}
+
 /* 화면 600px 이상부터 적용 */
 @media screen and (min-width: 750px){
     .container{

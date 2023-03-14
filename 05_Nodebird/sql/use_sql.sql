@@ -35,30 +35,24 @@ select f.*
      on f.followingId = u.id
     and followerId=2;
   
--- 로그인 한 사람을 팔로우 한 사용자(맞팔 확인 f4f follow for follow)
- select f.followingId, u.id as followerId, u.nick as follwerNick
-       , case when u.id = f2.followingId  then 'f4f' else null end as a
+-- 로그인 한 사람을 팔로우 한 사용자
+ select distinct f.followingId, u.id as followerId, u.nick as follwerNick
    from Follow f
    join nodebird.users u 
      on f.followerId  = u.id
-    and followingId = 2
-   join Follow f2
-     on f.followingId = f2.followerId;
-   
--- 로그인 한 사람이 팔로우 한 사용자, 로그인 한사람을 팔로우한 사용
-  select DISTINCT f.followerId 
-       , u.id as follwingId, u.nick as followingNick
-       , f2.followerId, f2.follwerNick
-   from nodebird.Follow f
+    and followingId = 1;
+  
+-- 로그인 한 사람을 팔로우 한 사용자(맞팔 확인 f4f follow for follow)
+ select distinct f.followingId, u.id as followerId, u.nick as follwerNick
+      , case when f2.followerId is not null then 'f4f' else null end as followForFollow
+   from Follow f
    join nodebird.users u 
-     on f.followingId = u.id
-    and followerId=2
-   right join (select f.followingId, u.id as followerId, u.nick as follwerNick
-			   from Follow f
-			   join nodebird.users u 
-			     on f.followerId  = u.id
-			    and followingId = 2) f2
-      on f.followerId = f2.followingId
+     on f.followerId  = u.id
+    and followingId = 1
+   left join Follow f2 
+     on f.followingId = f2.followerId and f.followerId = f2.followingId;
+   
+
      
 
 

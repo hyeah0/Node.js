@@ -48,7 +48,9 @@
                     <div class="twit-author-group">
                         <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
                         <input type="hidden" value="{{twit.id}}" class="twit-id">
-                        <div class="twit-author">{{twit.User.nick}}</div>
+                        <div class="twit-author">
+                            <a href="">{{twit.User.nick}}</a>
+                        </div>
                         
                         <!-- 팔로우 리스트에 없는 아이디일 경우 & 본인이 아닐경우 -->
                         {% if not followingIdList.includes(twit.User.id) and twit.User.id !== user.id %}
@@ -114,15 +116,28 @@
 
             // #my-id = [views]/[layout.html] 폴더에 input hidden으로 있다.
             const myId = document.querySelector("#my-id");
+            if(!myId){
+                console.log('로그인 전');
+                alert('로그인 먼저 해주세요');
+                const input_email = document.querySelector('#email');
+
+                input_email.style.backgroundColor = "#3f1c8c29";
+                input_email.style.boxShadow = "rgba(0, 0, 0, 0.18) 0px 2px 4px";
+
+                input_email.addEventListener('keyup',()=>{
+                    input_email.style.backgroundColor = "";
+                    input_email.style.boxShadow = "";
+                })
             
-            if(myId){
+            }else{
                 const userId = tag.parentNode.querySelector('.twit-user-id').value;
 
-                console.log('main.html 팔로우 버튼 클릭');
+                console.log('로그인 ok >> main.html 팔로우 버튼 클릭');
                 console.log(`myId : ${myId} / userId : ${userId}`);
 
                 if(userId !== myId.value){
                     if(confirm('팔로잉 하시겠습니까?')){
+
                         axios.post(`/user/${userId}/follow`)
                              .then(()=>{
                                 location.reload();

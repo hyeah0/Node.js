@@ -53,13 +53,13 @@ module.exports = ()=>{
 
             // 유저를 팔로우한 사용자 정보
             const sql2 = `select f.followerId, u.id, u.nick
-                               , case when u.id = f2.followingId  then 'f4f' else null end as followForFollow
+                               , case when f2.followerId is not null then 'f4f' else null end as followForFollow
                             from Follow f
-                            join nodebird.users u 
+                            join users u 
                               on f.followerId  = u.id
                              and followingId = ${id}
-                            join Follow f2
-                              on f.followingId = f2.followerId`;  
+                            left join Follow f2 
+                              on f.followingId = f2.followerId and f.followerId = f2.followingId`;  
             const followers = await sequelize.query(sql2, { type: QueryTypes.SELECT });
 
             user.Followers = followers;
