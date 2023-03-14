@@ -3,21 +3,37 @@
 {% block content %}
 <!-- profile.html -->
     <div class="timeline">
-        <div class="followings half">
-            <h2>팔로잉 목록</h2>
-            {% if user.Followings %}
-                {% for following in uwer.Follwings %}
-                    <div>{{following.nick}}</div>
-                {% endfor%}
-            {% endif %}
+        <div class="follow-top" onclick="location.href='/'">
+            <button class="btn">목록</button>
         </div>
-        <div class="followers half">
-            <h2>팔로워 목록</h2>
-            {% if user.Followers %}
-                {% for followers in uwer.Follwers %}
-                    <div>{{followers.nick}}</div>
-                {% endfor%}
-            {% endif %}
+        <div class="follow">
+            <div class="followings half">
+                <h2>팔로잉 목록</h2>
+                {% if user.Followings %}
+                    {% for following in user.Followings %}
+                        <div class="group">
+                            <a href="/">{{following.nick}}</a>
+                            <button class="follow-btn">팔로잉</button>
+                        </div>
+                    {% endfor%}
+                {% endif %}
+            </div>
+            <div class="followers half">
+                <h2>팔로워 목록</h2>
+                {% if user.Followers %}
+                    {% for followers in user.Followers %}
+                        <div class="group">
+                            <a href="/">{{followers.nick}}</a>
+                            
+                            <!-- 맞팔하지 않은 경우 팔로우 버튼 생성 -->
+                            {% if followers.followForFollow !== 'f4f' %}
+                                <button class="follow-btn">팔로우</button>
+                            {% endif %}
+
+                        </div>
+                    {% endfor%}
+                {% endif %}
+            </div>
         </div>
     </div>
 <!-- profile.html end -->

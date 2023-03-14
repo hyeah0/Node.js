@@ -41,11 +41,13 @@ exports.renderHashtag = async (req, res, next) => {
     if(!query){
         return res.redirect('/');
     } 
-    console.log(query);
+    console.log(query); //낄낄
     console.log('* -------------------------------------------- *');
 
     try{
+        // select * from hashtag where title = query
         const hashtag = await Hashtag.findOne({ where: {title: query}});
+        
         let posts = [];
         if(hashtag){
             posts = await hashtag.getPosts({include: [{model: User}]});

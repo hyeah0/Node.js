@@ -17,6 +17,7 @@ router.use((req, res, next)=>{
     GET /profile [views/profile.html]
     GET /join    [views/join.html]
     GET /        [views/main.html]
+    GET /hashtag : 해시태그 검색 결과
  */
 router.get('/profile', isLoggedIn, renderProfile);
 router.get('/join', isNotLoggedIn, renderJoin);

@@ -1,33 +1,10 @@
-/* -------------------------------- */
-/* -- 테스트용 -- */
-/* .container{
-    border: 1px solid pink;
-}
-.profile-wrap{
-    border: 1px solid green;
-} */
-
-/* 오른쪽 부분 */
-/* .timeline{
-    background-color: pink;
-} */
-/* 
-.hashtag-search{
-    background-color: orange;
-} */
-
-/* 회원가입 */
-/* #join-form{
-    background-color: aliceblue;
-} */
-
-/* -------------------------- */   
 :root{
     --box_shodow : rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
     --box_shodow_point : rgba(0, 0, 0, 0.18) 0px 2px 4px;
     --box_shodow_block : rgba(0, 0, 0, 0.08) 0px 4px 12px;
     --sub-point-color: #75A62D;
     --sub-pale-color: #CBD99A;
+    --sub-pale-color-light: #cbd99a9c;
     --bold-point-color : #401C8C;
     --pale-color : #928FA6;
     --backgroud-color : #3f1c8c29;
@@ -260,7 +237,7 @@ input:focus{
 .twit-img-upload #img-label{
     padding: 8px 12px 8px 12px;
     border-radius: 4px;
-    background-color: #cbd99a9c;
+    background-color: var(--sub-pale-color-light);
     color: var(--pale-color);
     letter-spacing: 0.8px;
     cursor: pointer;
@@ -277,14 +254,14 @@ input:focus{
 }
 
 .twit-img-upload .btn{
-    background-color: #cbd99a9c;
+    background-color: var(--sub-pale-color-light);
 }
 
 /* ------------------------------ 
    main : 작성한 트윗
    ------------------------------ */
 .twit{
-    background-color: #cbd99a9c;
+    background-color: var(--sub-pale-color-light);
 }
 
 .twit-group{
@@ -351,6 +328,49 @@ input:focus{
     margin-right: 20px;
 }
 
+/* ------------------------------
+    profile : 팔로잉, 팔로워 목록
+   ------------------------------ */
+.follow-top{
+    display: flex;
+    padding:10px;
+    justify-content: right;
+}
 
+.follow{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
 
+.follow .half{
+    width: 100%;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--backgroud-pale-color);
+}
 
+.follow .half h2{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+    background-color: var(--backgroud-pale-color);
+}
+
+.follow .half .group{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 2fr 1fr);
+}
+
+.follow-btn{
+    background-color: transparent;
+    border: none;
+    color: var(--pale-color);
+    cursor: pointer;
+}
+
+.follow-btn:hover{
+    font-weight: bold;
+    color: var(--bold-point-color);
+}

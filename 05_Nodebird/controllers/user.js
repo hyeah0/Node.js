@@ -16,7 +16,7 @@ exports.follow = async (req, res, next) => {
             // parseInt(req.params.id, 10) : req.params.id를 10진수로 표현 
             // radix가 10인 경우 10진수, 8인 경우는 8진수, 16인 경우 16진수로 변환
 
-            res.send('팔로우 성공')
+            res.send('팔로우 성공');
         
         }else{
             res.status(404).send('no user');
