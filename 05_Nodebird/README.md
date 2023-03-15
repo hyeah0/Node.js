@@ -148,11 +148,11 @@
       </li>
       <li>
         <a href="">[kakaoStrategy.js]</a>
-         : css 파일
+         : 카카오 로그인 전략(방식)
       </li>
       <li>
         <a href="">[localStrategy.js]</a>
-         : css 파일
+         : 로컬 로그인 전략(방식)
       </li>
     </ul>
 <br>

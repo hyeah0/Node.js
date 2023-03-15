@@ -1,5 +1,14 @@
+/* --------------------------------------------------------------------------------------
+    1. 팔로워 하기 (/user/${userId}/follow)
+    2. 팔로잉 취소 (/user/${userId}/defollow)
+ ---------------------------------------------------------------------------------------- */
 const User = require('../models/user');
+const { QueryTypes } = require("sequelize");
+const { sequelize } = require("../models/index");
 
+/* --------------------------------------------------------------------------------------
+    팔로워 하기
+ ---------------------------------------------------------------------------------------- */
 exports.follow = async (req, res, next) => {
     try{
         console.log('* -------------------------------------------- *');
@@ -21,6 +30,28 @@ exports.follow = async (req, res, next) => {
         }else{
             res.status(404).send('no user');
         }
+
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+};
+
+/* --------------------------------------------------------------------------------------
+    팔로잉 취소하기
+ ---------------------------------------------------------------------------------------- */
+exports.defollow = async (req, res, next)=>{
+    try{
+        console.log('* -------------------------------------------- *');
+        console.log('  controllers.user.js : 팔로잉취소');
+        console.log(`req.params.id : ${req.params.id}`);
+        console.log(`req.user.id : ${req.user.id}`);
+        console.log('* -------------------------------------------- *');
+        
+        const sql = `delete from follow where followerid = ${req.user.id} and followingid = ${req.params.id}`;
+        const result = await sequelize.query(sql, { type: QueryTypes.DELETE });
+
+        res.send('언팔로우 성공');
 
     }catch(err){
         console.error(err);

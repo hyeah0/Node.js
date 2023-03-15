@@ -13,7 +13,7 @@
                     {% for following in user.Followings %}
                         <div class="group">
                             <a href="/">{{following.nick}}</a>
-                            <button class="follow-btn">팔로잉</button>
+                            <button class="follow-btn" onclick='defollow({{following.id}})'>팔로잉</button>
                         </div>
                     {% endfor%}
                 {% endif %}
@@ -27,7 +27,7 @@
                             
                             <!-- 맞팔하지 않은 경우 팔로우 버튼 생성 -->
                             {% if followers.followForFollow !== 'f4f' %}
-                                <button class="follow-btn">팔로우</button>
+                                <button class="follow-btn" onclick='follow({{followers.id}})'>팔로우</button>
                             {% endif %}
 
                         </div>
@@ -37,4 +37,42 @@
         </div>
     </div>
 <!-- profile.html end -->
+{% endblock %}
+
+
+{% block script %}
+<script>
+    /* ----------------------------------------------------------- 
+        맞팔로잉 하기
+    -------------------------------------------------------------- */
+    // onclick="location.href='/user/{{following.id}}/follow'"
+    function follow(followingId){
+        console.log('맞팔로우 중입니다..')
+        console.log(`followingId : ${followingId}`);
+
+        axios.post(`/user/${followingId}/follow`)
+             .then(()=>{
+                location.reload();
+             })
+             .catch((err)=>{console.error(err)});
+    }
+
+
+    /* ----------------------------------------------------------- 
+        팔로워 취소
+    -------------------------------------------------------------- */
+    // onclick="location.href='/user/{{following.id}}/defollow'"
+    function defollow(defollowId){
+        console.log(`defollowId : ${defollowId}`);
+        
+        if(confirm('언팔로우 하시겠습니까?')){
+            axios.post(`/user/${defollowId}/defollow`)
+                 .then(()=>{
+                    location.reload();
+                 })
+                 .catch((err)=>{console.log(err)});        
+        }
+    }
+
+</script>
 {% endblock %}
