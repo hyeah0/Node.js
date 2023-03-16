@@ -10,7 +10,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const { afterUploadImage, uploadPost } = require('../controllers/post');
+const { afterUploadImage, uploadPost, deletePost, updatePost } = require('../controllers/post');
 const { isLoggedIn } = require('../middlewares');
 
 const router = express.Router();
@@ -54,12 +54,18 @@ const upload = multer({
 });
 
 /* ----------------------------------------
-    POST    /post/img   파일 업로드
-    POST    /post       포스팅
+    POST        /post/img       파일 업로드
+    POST        /post           글 작성
+    PUT         /post/change    글 수정
+    DELETE      /post/delete    글 삭제
  ------------------------------------------ */
 router.post('/img', isLoggedIn, upload.single('img'), afterUploadImage);
 
 const upload2 = multer();
 router.post('/', isLoggedIn, upload2.none(), uploadPost);
+router.put('/change', isLoggedIn, updatePost);
+
+router.delete('/delete', isLoggedIn, deletePost);
+
 
 module.exports = router;

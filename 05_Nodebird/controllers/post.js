@@ -1,4 +1,6 @@
 const { Post, Hashtag } = require('../models');
+const { QueryTypes } = require("sequelize");
+const { sequelize } = require("../models/index");
 
 /* ----------------------------------------
     POST    /post/img   파일 업로드
@@ -12,7 +14,7 @@ exports.afterUploadImage = (req, res) => {
 }
 
 /* ----------------------------------------
-    POST    /post       포스팅
+    POST    /post       글 작성
  ------------------------------------------ */
 exports.uploadPost = async (req, res, next) => {
     try{
@@ -59,3 +61,46 @@ exports.uploadPost = async (req, res, next) => {
     }
 };
 
+/* ----------------------------------------
+    PUT     /post/change     글 수정
+ ------------------------------------------ */
+exports.updatePost = async (req, res, next)=>{
+    try{
+        console.log('* -------------------------------------------- *');
+        console.log('controllers.post.js updatePost 글 수정');
+        console.log('req.body');
+        console.log(req.body);
+        console.log('req.body.changeContent');
+        console.log(req.body.changeContent);
+        console.log('req.body.url');
+        console.log(req.body.url);
+        console.log('req.user.id');
+        console.log(req.user.id);
+        console.log('* -------------------------------------------- *');
+
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+}
+
+/* ----------------------------------------
+    POST    /post/delete     글 삭제
+ ------------------------------------------ */
+ exports.deletePost = async (req, res, next) => {
+    try{
+        console.log('* -------------------------------------------- *');
+        console.log('controllers.post.js deletePost 글 삭제');
+        console.log(req.body);
+        console.log('* -------------------------------------------- *');
+
+        const sql = `delete from posts where id = ${req.body.postId} and UserId = ${req.body.postUserId}`;
+        const result = await sequelize.query(sql, { type: QueryTypes.DELETE });
+    
+        res.send('글 삭제 성공!');
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+    
+}

@@ -254,7 +254,7 @@ input:focus{
     font-weight: bold;
 }
 
-.twit-img-upload #img{
+.twit-img-upload .input-img{
     display: none;
 }
 
@@ -270,13 +270,24 @@ input:focus{
 }
 
 .twit-group{
+    padding: 20px;
     background-color: white;
     border-radius: 1rem;
     box-shadow: var(--box_shodow);
 }
 
+/* -- 작성일 / 수정일 -- */
+.twit-created-group{
+    margin-bottom: 10px;
+}
+
+.twit-created-group div{
+    text-align: right;
+}
+
+/* -- 작성자 -- */
 .twit-author-group{
-    padding: 10px 20px 10px 20px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
 }
@@ -286,8 +297,9 @@ input:focus{
     font-size: large;
 }
 
+/* -- 작성글 -- */
 .twit-content-group{
-    padding: 0px 20px 0px 20px;
+    margin-bottom: 10px;
 }
 
 .twit-content{
@@ -297,6 +309,17 @@ input:focus{
 .twit-img{
     padding-bottom: 10px;
 }
+
+/* -- 수정 / 삭제 -- */
+.twit-update-delete-group{
+    display: flex;
+    justify-content: right;
+}
+
+.twit-update-delete-group .btn:nth-of-type(1){
+    margin-right: 10px;
+}
+
 
 /* ------------------------------ 
    join 
