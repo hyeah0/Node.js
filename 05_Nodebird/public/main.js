@@ -135,9 +135,13 @@ function changeImg(updateImg, imgsrc){
 function updateOkPost(postUserId, postId){
     console.log('수정중..!');
     const changeContent = document.querySelector('.change-content').value;
+    
     let changeImgUrl = '';
     if(document.querySelector(`.twit_${postId} .twit-img`)){
-        changeImgUrl = document.querySelector('#change-img-url').value;
+        
+        let beforeStr = document.querySelector('#change-img-url').value;
+        let afterStr = beforeStr.split('/img/');
+        changeImgUrl = `/img/${afterStr[1]}`;
     }
 
     axios.put('/post/change',{

@@ -1,6 +1,7 @@
 const { Post, Hashtag } = require('../models');
-const { QueryTypes } = require("sequelize");
+const { QueryTypes, DATE } = require("sequelize");
 const { sequelize } = require("../models/index");
+
 
 /* ----------------------------------------
     POST    /post/img   파일 업로드
@@ -68,15 +69,31 @@ exports.updatePost = async (req, res, next)=>{
     try{
         console.log('* -------------------------------------------- *');
         console.log('controllers.post.js updatePost 글 수정');
-        console.log('req.body');
-        console.log(req.body);
-        console.log('req.body.changeContent');
-        console.log(req.body.changeContent);
-        console.log('req.body.url');
-        console.log(req.body.url);
-        console.log('req.user.id');
-        console.log(req.user.id);
         console.log('* -------------------------------------------- *');
+
+        // 1. 글 수정
+        // 2. posthashtag 삭제후 hash태그 재등록
+
+        // 업데이트 시간 변경 안됨..
+        // const sql = `update posts 
+        //                 set content = '${req.body.data.changeContent}',
+        //                     img = '${req.body.data.changeImgUrl}'
+        //               where id= ${req.body.data.postId} and UserId = ${req.body.data.postUserId}`;
+        // const result = await sequelize.query(sql, {type: QueryTypes.UPDATE});
+
+        Post.update(
+            {/* -- 변경값 설정 ---------- */
+                content: `${req.body.data.changeContent}`,
+                img: `${req.body.data.changeImgUrl}`,
+            },
+            {/* -- 조건 --------------- */
+                where: {id: `${req.body.data.postId}`, UserId: `${req.body.data.postUserId}`}
+            }
+        );
+
+        // -- 해시태그
+
+        res.send('글 수정 성공!');
 
     }catch(err){
         console.error(err);
