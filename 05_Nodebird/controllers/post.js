@@ -71,18 +71,14 @@ exports.updatePost = async (req, res, next)=>{
         console.log('controllers.post.js updatePost 글 수정');
         console.log('* -------------------------------------------- *');
 
+        // -- 1. posthashtag 삭제
+        // -- 2. 글 수정 
+        // -- 3. hash태그 
+
         // 1. 글 수정
-        // 2. posthashtag 삭제후 hash태그 재등록
-
-        // 업데이트 시간 변경 안됨..
-        // const sql = `update posts 
-        //                 set content = '${req.body.data.changeContent}',
-        //                     img = '${req.body.data.changeImgUrl}'
-        //               where id= ${req.body.data.postId} and UserId = ${req.body.data.postUserId}`;
-        // const result = await sequelize.query(sql, {type: QueryTypes.UPDATE});
-
-        Post.update(
+        const post = await Post.update(
             {/* -- 변경값 설정 ---------- */
+                id: `${req.body.data.postId}`,
                 content: `${req.body.data.changeContent}`,
                 img: `${req.body.data.changeImgUrl}`,
             },
@@ -90,8 +86,74 @@ exports.updatePost = async (req, res, next)=>{
                 where: {id: `${req.body.data.postId}`, UserId: `${req.body.data.postUserId}`}
             }
         );
+ 
+        const hashtags = req.body.data.changeContent.match(/#[^\s#]*/g);   // ① 재 작성된 해시태그를 정규 표현식으로 추출 (\s: 공백을 ^: 제외)
+        const beforeHashtags = req.body.data.beforeContent.match(/#[^\s#]*/g);
 
-        // -- 해시태그
+        if(hashtags){
+            console.log('* -------------------------------------------- *');
+            console.log('  controllers.post.js 글 수정시 작성한 해시태그 위 befor, 아래 after');
+            console.log(beforeHashtags);
+            console.log(hashtags);
+            console.log('* -------------------------------------------- *');
+
+            // 해시태그 저장
+            const result = await Promise.all(
+                hashtags.map(tag => {
+                    return Hashtag.findOrCreate({   // 특정 요소를 검색하거나, 존재하지 않으면 새로 생성
+                        where: { title: tag.slice(1).toLowerCase() },   // ② 해시태그들 배열 첫번째, 소문자로 변경한 값이 있는지 확인
+                    })
+                }),
+            );
+
+            // console.log('--------------------------------');
+            // console.log(result[0]);
+            // console.log('--------------------------------');
+
+            result.map(rtag => {
+                console.log(rtag[0].dataValues.id);
+                console.log(rtag[0].dataValues.title);
+            });
+            // posthashtag 저장
+            // 1. 수정되지 않은 해시태그 >>> 유지
+            // 2. 해시태그를 수정할 경우 >>> 수정 전 해시태그는 posthashtag 테이블에서 삭제, 새로 작성한 해시태그는 posthashtag 테이블에 추가 
+
+            // 이미 있는 해시태그
+            // const alreadyHashtag = hashtags.filter(hashtag => {
+            //     return beforeHashtags.some(beHashtag => beHashtag === hashtag );
+            //   });
+            // console.log(alreadyHashtag);
+
+            // let alreadyHashtagId = [];
+            // result.map(rtag => {
+            //     alreadyHashtagId.push(rtag[0].dataValues.id);
+            // });
+
+            // console.log(hashtagId);
+            // console.log(hashtagId.toString());
+
+            // // 해시태그를 수정할 경우 >>> 수정 전 해시태그는 posthashtag 테이블에서 삭제
+            // const dPostHashSql = `delete from PostHashtag where PostId = ${req.body.data.postId} and HashtagId not in (${hashtagId})`;
+            // await sequelize.query(dPostHashSql, {type: QueryTypes.DELETE});
+            
+            // const alreadyTagSql = `select HashtagId from PostHashtag where PostId = ${req.body.data.postId}`;
+            // const alreadyTag = await sequelize.query(alreadyTagSql, {type: QueryTypes.SELECT});
+            // console.log(alreadyTag);
+            // console.log(alreadyTag.HashtagId);
+
+            // // 수정되지 않은 해시태그 >>> 유지
+            // result.map(rtag => {
+            //     // 해시태그를 수정할 경우 >>> 새로 작성한 해시태그는 posthashtag 테이블에 추가 
+            //     const createPostHashSql = `insert into PoshHashtag (createdAt,updatedAt,PostId,HashtagId) 
+            //                                                 values (${rtag[0].dataValues.createdAt}, ${rtag[0].dataValues.updatedAt}
+            //                                                        ,${req.body.data.postId}, ${rtag[0].dataValues.id})
+            //                                                  where HashtagId not in (${alreadyTag[i]})`;
+            //     sequelize.query(createPostHashSql, {type: QueryTypes.INSERT});                                          
+            // });
+            
+        }
+
+
 
         res.send('글 수정 성공!');
 
@@ -121,3 +183,15 @@ exports.updatePost = async (req, res, next)=>{
     }
     
 }
+
+               // const postResult = sequelize.query(createPostHashSql, {type: QueryTypes.INSERT});
+                
+                // const selectSql = `select PostId, HashtagId from PostHashtag where PostId = ${req.body.data.postId} and HashtagId = ${hashtagId}`;
+                // const result = sequelize.query(selectSql, { type: QueryTypes.DELETE });
+                // const dPostHashSql = `delete from PostHashtag where PostId = ${req.body.data.postId}`;
+                // const postResult = await sequelize.query(dPostHashSql, {type: QueryTypes.DELETE});
+
+                // posthashtag 저장
+                // INSERT INTO PostHashtag (createdAt,updatedAt,PostId,HashtagId) VALUES ('2023-03-17 06:43:00','2023-03-17 06:43:00',11,13),('2023-03-17 06:43:00','2023-03-17 06:43:00',11,14);
+                
+                //await post.addHashtag(result.map(rtag => rtag[0]));    // ③ [모델, boolean] 값에서 모델만 가져오기

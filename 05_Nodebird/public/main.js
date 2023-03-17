@@ -82,6 +82,8 @@ function updatePost(postUserId, postId){
     const beforeText = updateText.innerText;
     const updateImg = document.querySelector(`.twit_${postId} .twit-img`);
     
+    console.log(beforeText);
+
     // 이미지가 있을 경우
     if(updateImg){
         console.log('img가 있습니다');
@@ -94,7 +96,7 @@ function updatePost(postUserId, postId){
     updateText.innerHTML = `<div class="input-group">
                                 <textarea class="change-content" id="twit" maxlength="140" rows="5" cols="80" required>${beforeText}</textarea>
                             </div>`;
-    btnGroup.innerHTML = `<button type="button" class="btn" onclick="updateOkPost(${postUserId},${postId})">수정완료</button>
+    btnGroup.innerHTML = `<button type="button" class="btn" onclick="updateOkPost(${postUserId},${postId},'${beforeText}')">수정완료</button>
     <button type="button" class="btn" onclick="location.href='/'">취소</button>`;
 }
 
@@ -132,10 +134,10 @@ function changeImg(updateImg, imgsrc){
 }
 
 // 글 수정 완료
-function updateOkPost(postUserId, postId){
+function updateOkPost(postUserId, postId, beforeText){
     console.log('수정중..!');
     const changeContent = document.querySelector('.change-content').value;
-    
+
     let changeImgUrl = '';
     if(document.querySelector(`.twit_${postId} .twit-img`)){
         
@@ -148,6 +150,7 @@ function updateOkPost(postUserId, postId){
         data: {
             postUserId : postUserId,
             postId: postId,
+            beforeContent: beforeText,
             changeContent: changeContent,
             changeImgUrl: changeImgUrl,
         }
