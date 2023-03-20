@@ -28,6 +28,8 @@ exports.uploadPost = async (req, res, next) => {
             img: req.body.url,
             UserId: req.user.id,
         });
+        console.log(post);
+        console.log('----------------------------');
 
         // 해시태그
         /**
@@ -65,18 +67,25 @@ exports.uploadPost = async (req, res, next) => {
 /* ----------------------------------------
     PUT     /post/change     글 수정
  ------------------------------------------ */
+/*
+    1. 글 수정
+        2-1. 수정한 글에 해시태그가 있을 경우
+            3. 기존 글과 수정한 글의 해시태그의 변화가 있을 경우
+
+        2-2. 수정한 글에 해시태그가 없을 경우
+*/
 exports.updatePost = async (req, res, next)=>{
     try{
+
         console.log('* -------------------------------------------- *');
         console.log('controllers.post.js updatePost 글 수정');
         console.log('* -------------------------------------------- *');
 
-        // -- 1. posthashtag 삭제
-        // -- 2. 글 수정 
-        // -- 3. hash태그 
-
-        // 1. 글 수정
-        const post = await Post.update(
+        /* --------------------------------------------------------------
+            1. 글 수정  
+               글 수정시 post 값은 1로 나온다.
+        ----------------------------------------------------------------- */
+        const post = await Post.update( 
             {/* -- 변경값 설정 ---------- */
                 id: `${req.body.data.postId}`,
                 content: `${req.body.data.changeContent}`,
@@ -86,74 +95,87 @@ exports.updatePost = async (req, res, next)=>{
                 where: {id: `${req.body.data.postId}`, UserId: `${req.body.data.postUserId}`}
             }
         );
- 
+
+        // 화면으로 부터 작성된 글을 받아 해시태그만 추출
         const hashtags = req.body.data.changeContent.match(/#[^\s#]*/g);   // ① 재 작성된 해시태그를 정규 표현식으로 추출 (\s: 공백을 ^: 제외)
         const beforeHashtags = req.body.data.beforeContent.match(/#[^\s#]*/g);
 
-        if(hashtags){
+        /* --------------------------------------------------------------
+            2-1. 수정한 글에 해시태그가 있을 경우
+        ----------------------------------------------------------------- */
+        if(hashtags){   
             console.log('* -------------------------------------------- *');
-            console.log('  controllers.post.js 글 수정시 작성한 해시태그 위 befor, 아래 after');
-            console.log(beforeHashtags);
+            console.log('  controllers.post.js befor hashtag, 아래 after hashtag');
+            console.log(beforeHashtags);    
             console.log(hashtags);
             console.log('* -------------------------------------------- *');
 
-            // 해시태그 저장
-            const result = await Promise.all(
-                hashtags.map(tag => {
-                    return Hashtag.findOrCreate({   // 특정 요소를 검색하거나, 존재하지 않으면 새로 생성
-                        where: { title: tag.slice(1).toLowerCase() },   // ② 해시태그들 배열 첫번째, 소문자로 변경한 값이 있는지 확인
-                    })
-                }),
-            );
-
-            // console.log('--------------------------------');
-            // console.log(result[0]);
-            // console.log('--------------------------------');
-
-            result.map(rtag => {
-                console.log(rtag[0].dataValues.id);
-                console.log(rtag[0].dataValues.title);
+            // 작성된 글의 해시태그와 수정된 글의 해시태그 다른 경우 확인
+            const addTag = hashtags.filter(hashtag => {
+                if(beforeHashtags){
+                    return ! beforeHashtags.some(beHashtag => beHashtag === hashtag );
+                }
+                return hashtag;
             });
-            // posthashtag 저장
-            // 1. 수정되지 않은 해시태그 >>> 유지
-            // 2. 해시태그를 수정할 경우 >>> 수정 전 해시태그는 posthashtag 테이블에서 삭제, 새로 작성한 해시태그는 posthashtag 테이블에 추가 
+            console.log('추가된 태그 ⬇️');
+            console.log(addTag);
 
-            // 이미 있는 해시태그
-            // const alreadyHashtag = hashtags.filter(hashtag => {
-            //     return beforeHashtags.some(beHashtag => beHashtag === hashtag );
-            //   });
-            // console.log(alreadyHashtag);
+            /* --------------------------------------------------------------
+                2-1. 기존 글과 수정한 글의 해시태그의 변화가 있을 경우
+            ----------------------------------------------------------------- */
+            if(addTag || hashtags.length() != beforeHashtags.length()){
+                console.log('추가된 태그가 있거나, 태그의 변화가 있습니다.');
+                
+                // 글에 작성된 해시태그 정보 모두 가져오기(추가 해시태그는 테이블에 추가)
+                const result = await Promise.all(
+                    hashtags.map(tag => {
+                        return Hashtag.findOrCreate({   
+                            where: { title: tag.slice(1).toLowerCase() },  
+                        })
+                    }),
+                );
 
-            // let alreadyHashtagId = [];
-            // result.map(rtag => {
-            //     alreadyHashtagId.push(rtag[0].dataValues.id);
-            // });
+                let writeHashtagId = [];         // 작성된 해시태그 아이디 전체
+                let addHashTagId = [];           // 추가된 해시태그 아이디 전체
+                result.map(rtag => {
+                    writeHashtagId.push(rtag[0].dataValues.id);
 
-            // console.log(hashtagId);
-            // console.log(hashtagId.toString());
+                    // 추가된 해시태그가 있을 경우 실행
+                    if(addTag){ 
+                        addTag.forEach(e=>{
+                            console.log(e.replace('#','').toLowerCase());
+                            if(e.replace('#','').toLowerCase() === rtag[0].dataValues.title){
+                                addHashTagId.push(rtag[0].dataValues.id);
+                            } 
 
-            // // 해시태그를 수정할 경우 >>> 수정 전 해시태그는 posthashtag 테이블에서 삭제
-            // const dPostHashSql = `delete from PostHashtag where PostId = ${req.body.data.postId} and HashtagId not in (${hashtagId})`;
-            // await sequelize.query(dPostHashSql, {type: QueryTypes.DELETE});
+                        })
+                    }
+                });
             
-            // const alreadyTagSql = `select HashtagId from PostHashtag where PostId = ${req.body.data.postId}`;
-            // const alreadyTag = await sequelize.query(alreadyTagSql, {type: QueryTypes.SELECT});
-            // console.log(alreadyTag);
-            // console.log(alreadyTag.HashtagId);
-
-            // // 수정되지 않은 해시태그 >>> 유지
-            // result.map(rtag => {
-            //     // 해시태그를 수정할 경우 >>> 새로 작성한 해시태그는 posthashtag 테이블에 추가 
-            //     const createPostHashSql = `insert into PoshHashtag (createdAt,updatedAt,PostId,HashtagId) 
-            //                                                 values (${rtag[0].dataValues.createdAt}, ${rtag[0].dataValues.updatedAt}
-            //                                                        ,${req.body.data.postId}, ${rtag[0].dataValues.id})
-            //                                                  where HashtagId not in (${alreadyTag[i]})`;
-            //     sequelize.query(createPostHashSql, {type: QueryTypes.INSERT});                                          
-            // });
+                // 기존글에 있던 해시태그를 삭제했을 경우 삭제한 해시태그id PostHashtag 테이블에서 삭제
+                const dPostHashSql = `delete from PostHashtag where PostId = ${req.body.data.postId} and HashtagId not in (${writeHashtagId});`;
+                await sequelize.query(dPostHashSql, {type: QueryTypes.DELETE});
             
+                // 추가되거나 변경된 hashTag가 있을 경우
+                if(addHashTagId){
+                    console.log('태그 변경');
+                    let creupdate = timestamp();
+
+                    addHashTagId.forEach(e=>{
+                        console.log(e);
+                    
+                        const createPostHashSql = `insert into PostHashtag (createdAt, updatedAt, PostId, HashtagId) 
+                                                                    values ('${creupdate}', '${creupdate}', ${req.body.data.postId}, ${e})`;
+                        sequelize.query(createPostHashSql, {type: QueryTypes.INSERT})
+                    })
+                }
+            }
+            
+        }else{ // 수정한 글에 해시태그가 없을 경우
+            console.log('수정한 글에 해시태그가 없습니다.');
+            const dPostHashSql = `delete from PostHashtag where PostId = ${req.body.data.postId};`;
+            await sequelize.query(dPostHashSql, {type: QueryTypes.DELETE});
         }
-
-
 
         res.send('글 수정 성공!');
 
@@ -161,6 +183,13 @@ exports.updatePost = async (req, res, next)=>{
         console.error(err);
         next(err);
     }
+}
+
+// today
+function timestamp(){
+    let today = new Date();
+    today.setHours(today.getHours() + 9);
+    return today.toISOString().replace('T', ' ').substring(0, 19);
 }
 
 /* ----------------------------------------
@@ -183,15 +212,3 @@ exports.updatePost = async (req, res, next)=>{
     }
     
 }
-
-               // const postResult = sequelize.query(createPostHashSql, {type: QueryTypes.INSERT});
-                
-                // const selectSql = `select PostId, HashtagId from PostHashtag where PostId = ${req.body.data.postId} and HashtagId = ${hashtagId}`;
-                // const result = sequelize.query(selectSql, { type: QueryTypes.DELETE });
-                // const dPostHashSql = `delete from PostHashtag where PostId = ${req.body.data.postId}`;
-                // const postResult = await sequelize.query(dPostHashSql, {type: QueryTypes.DELETE});
-
-                // posthashtag 저장
-                // INSERT INTO PostHashtag (createdAt,updatedAt,PostId,HashtagId) VALUES ('2023-03-17 06:43:00','2023-03-17 06:43:00',11,13),('2023-03-17 06:43:00','2023-03-17 06:43:00',11,14);
-                
-                //await post.addHashtag(result.map(rtag => rtag[0]));    // ③ [모델, boolean] 값에서 모델만 가져오기
