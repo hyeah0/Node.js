@@ -45,21 +45,13 @@
         {% for twit in twits %}
             <div class="twit">
                 <div class="twit-group">
-                    
-                    <!-- 작성일 / 수정일 -->
-                    <div class="twit-created-group">
-                        {% if twit.created == twit.updated %}
-                            <div>작성일 : {{twit.created}}</div>
-                        {% else %}
-                            <div>작성일 : {{twit.created}}</div>
-                            <div>수정일 : {{twit.updated}}</div>
-                        {% endif %}
-                    </div>
 
                     <!-- 작성자  -->
                     <div class="twit-author-group">
+                        
                         <!-- 작성자 id -->
                         <input type="hidden" value="{{twit.postUserId}}" class="twit-user-id">
+                        
                         <!-- 글 id -->
                         <input type="hidden" value="{{twit.id}}" class="twit-id">
                         <div class="twit-author">
@@ -122,6 +114,16 @@
                         {% endif %}
                         
                         
+                    </div>
+
+                    <!-- 작성일 / 수정일 -->
+                    <div class="twit-created-group">
+                        {% if twit.createdAt == twit.updatedAt %}
+                            <div>작성일 : {{twit.createdAt}}</div>
+                        {% else %}
+                            <div>작성일 : {{twit.createdAt}}</div>
+                            <div>수정일 : {{twit.updatedAt}}</div>
+                        {% endif %}
                     </div>
 
                     <!-- 수정 / 삭제 -->
