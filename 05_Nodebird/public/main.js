@@ -67,8 +67,8 @@ document.querySelectorAll('.twit-follow').forEach(function(tag){
                 }
             }
         }
-    }); // follow button click event end
-}); // follow button foreach end
+    });
+}); 
 
 /* ----------------------------------------------------------- 
     글 수정 / 글 삭제
@@ -78,17 +78,17 @@ document.querySelectorAll('.twit-follow').forEach(function(tag){
 function updatePost(postId){
     console.log('update post');
 
-    const beforeContent = document.querySelector(`.twit_${postId} .twit-content`);
-    const beforeText =  document.querySelector(`.twit_${postId} .twit_content_txt`).value;
-    const updateBtn = document.querySelector(`.twit_btn_${postId}`);
+    const beforeContent = document.querySelector(`.twit-${postId} .twit-content`);
+    const beforeText =  document.querySelector(`.twit-${postId} .twit-content-txt`).value;
+    const updateBtn = document.querySelector(`.twit-btn-${postId}`);
     
-    const updateContent = document.querySelector(`.twit_content_${postId}`);
-    const updateText = document.querySelector(`.twit_content_${postId} .change-content`);
+    const updateContent = document.querySelector(`.twit-content-${postId}`);
+    const updateText = document.querySelector(`.twit-content-${postId} .change-content`);
     
-    const updateImg = document.querySelector(`.twit_img_${postId}`);
-    const changeNewImg = document.querySelector(`.twit_img_${postId} .changeOrNewImg`).value;
+    const updateImg = document.querySelector(`.twit-img-${postId}`);
+    const changeNewImg = document.querySelector(`.twit-img-${postId} .changeOrNewImg`).value;
     
-    const updateOkBtn = document.querySelector(`.twit_updateOk_btn_${postId}`);
+    const updateOkBtn = document.querySelector(`.twit-updateOk-btn-${postId}`);
 
     /* ----------------------------------------------
         디스플레이 none인 속성 제거
@@ -110,7 +110,7 @@ function updatePost(postId){
     ------------------------------------------------- */
     if(changeNewImg == "changeImg"){
         console.log('기존글에 img가 있습니다');
-        document.querySelector(`.twit_${postId} .twit-img`).style.display="none";
+        document.querySelector(`.twit-${postId} .twit-img`).style.display="none";
     }
 
     changeImg(postId);
@@ -119,7 +119,7 @@ function updatePost(postId){
 // 이미지 변경
 function changeImg(postId){
 
-    const afterImg = document.querySelector(`#twit_inputimg_${postId}`);
+    const afterImg = document.querySelector(`#twit-inputimg-${postId}`);
 
     afterImg.addEventListener('change', function(e){
         console.log('이미지가 변경 되었습니다.');
@@ -130,9 +130,9 @@ function changeImg(postId){
 
         axios.post('/post/img', formData)
              .then((res) => {
-                document.querySelector(`.twit_img_${postId} #change-img-url`).value = res.data.url;
-                document.querySelector(`.twit_img_${postId} #change-img-preview`).src = res.data.url;
-                document.querySelector(`.twit_img_${postId} #change-img-preview`).style.display = "inline";
+                document.querySelector(`.twit-img-${postId} #change-img-url`).value = res.data.url;
+                document.querySelector(`.twit-img-${postId} #change-img-preview`).src = res.data.url;
+                document.querySelector(`.twit-img-${postId} #change-img-preview`).style.display = "inline";
              })
              .catch((err)=>{
                 console.error(err);
@@ -143,14 +143,14 @@ function changeImg(postId){
 
 // 글 수정 완료
 function updateOkPost(postUserId, postId){
-    
-    const beforeText =  document.querySelector(`.twit_${postId} .twit_content_txt`).value;
-    const changeContent = document.querySelector(`.twit_content_${postId} .change-content`).value;
+
+    const beforeText =  document.querySelector(`.twit-${postId} .twit-content-txt`).value;
+    const changeContent = document.querySelector(`.twit-content-${postId} .change-content`).value;
 
     let changeImgUrl = '';
-    if(document.querySelector(`.twit_img_${postId} #change-img-url`)){
+    if(document.querySelector(`.twit-img-${postId} #change-img-url`)){
         
-        let beforeStr = document.querySelector(`.twit_img_${postId} #change-img-url`).value;
+        let beforeStr = document.querySelector(`.twit-img-${postId} #change-img-url`).value;
         let afterStr = beforeStr.split('/img/');
         changeImgUrl = `/img/${afterStr[1]}`;
     }
