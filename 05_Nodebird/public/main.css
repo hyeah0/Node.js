@@ -310,6 +310,14 @@ input:focus{
     padding-bottom: 10px;
 }
 
+/* -- 글 수정 버튼 누르기전 적용 -- */
+.change_content,
+.twit-update-img,
+.twit_updateOk{
+    display: none;
+}
+
+
 /* -- 수정 / 삭제 -- */
 .twit-update-delete-group{
     display: flex;

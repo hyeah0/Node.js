@@ -74,22 +74,72 @@
                     
                     <!-- 글 -->
                     <div class="twit-content-group twit_{{twit.id}}">
+                        <input type="hidden" class="twit_content_txt" value="{{twit.content}}">
                         <div class="twit-content">{{twit.content}}</div>
+
+                        <!----------------------------------
+                            글 수정 : 텍스트 수정
+                        ------------------------------------>
+                        <div class="change_content twit_content_{{twit.id}}">
+                            <textarea class="change-content" id="twit" maxlength="140" rows="5" cols="80" required></textarea>
+                        </div>
 
                         <!-- 이미지가 있을 경우 -->
                         {% if twit.img %}
                             <div class="twit-img">
                                 <img src="{{twit.img}}" alt="섬네일" width="150">
                             </div>
+
+                            <!----------------------------------
+                                글 수정 : 이미지 수정(기존 이미지 O)
+                            ------------------------------------>
+                            <div class="twit-update-img twit_img_{{twit.id}}">
+                                <input class="changeOrNewImg" type="hidden" value="changeImg"> 
+                                
+                                <img id="change-img-preview" src="{{twit.img}}" alt="섬네일" width="150">
+                                <input id="change-img-url" type="hidden" value="{{twit.img}}"> 
+                                
+                                <div class="twit-img-upload">
+                                    <label id="img-label" for="twit_inputimg_{{twit.id}}">이미지 수정</label>
+                                    <input id="twit_inputimg_{{twit.id}}" class="change-img input-img" type="file" accept="image/*" >
+                                </div>
+                            </div>
+                        {% else%}
+                            <!----------------------------------
+                                글 수정 : 이미지 수정(기존 이미지 X)
+                            ------------------------------------>
+                            <div class="twit-update-img twit_img_{{twit.id}}">
+                                <input class="changeOrNewImg" type="hidden" value="newImg"> 
+
+                                <img id="change-img-preview" src="" alt="섬네일" width="150">
+                                <input id="change-img-url" type="hidden" value="${imgsrc}"> 
+                                
+                                <div class="twit-img-upload">
+                                    <label id="img-label" for="twit_inputimg_{{twit.id}}">이미지 추가</label>
+                                    <input id="twit_inputimg_{{twit.id}}" class="change-img input-img" type="file" accept="image/*" >
+                                </div>
+                            </div>
                         {% endif %}
+                        
+                        
                     </div>
 
                     <!-- 수정 / 삭제 -->
-                    <div class="twit-update-delete-group twit_btn_{{twit.id}}">
+                    <div class="twit-update-delete-group">
                         {% if user %}
                             {% if twit.postUserId === user.id%}
-                                <button class="btn" onclick="updatePost({{twit.postUserId}},{{twit.id}})">수정</button>
-                                <button class="btn" onclick="deletePost({{twit.postUserId}},{{twit.id}})">삭제</button>   
+                                <div class="twit_btn_{{twit.id}}">
+                                    <button class="btn" onclick="updatePost({{twit.id}})">수정</button>
+                                    <button class="btn" onclick="deletePost({{twit.postUserId}},{{twit.id}})">삭제</button>   
+                                </div>
+
+                                <!----------------------------------
+                                    글 수정 : 수정 완료 버튼
+                                ------------------------------------>
+                                <div class="twit_updateOk twit_updateOk_btn_{{twit.id}}">
+                                    <button type="button" class="btn" onclick="updateOkPost({{twit.postUserId}},{{twit.id}})">수정완료</button>
+                                    <button type="button" class="btn" onclick="location.href='/'">취소</button>
+                                </div>
                             {% endif %}
                         {% endif %}
                     </div>

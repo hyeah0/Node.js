@@ -73,48 +73,56 @@ document.querySelectorAll('.twit-follow').forEach(function(tag){
 /* ----------------------------------------------------------- 
     글 수정 / 글 삭제
     // postUserId : 포스트 작성자 id
-    // postId : 포스트 고유 id
+    // postId : 포스트 고유 id(twit.id)
 -------------------------------------------------------------- */
-function updatePost(postUserId, postId){
+function updatePost(postId){
     console.log('update post');
 
-    const updateText = document.querySelector(`.twit_${postId} .twit-content`);
-    const beforeText = updateText.innerText;
-    const updateImg = document.querySelector(`.twit_${postId} .twit-img`);
+    const beforeContent = document.querySelector(`.twit_${postId} .twit-content`);
+    const beforeText =  document.querySelector(`.twit_${postId} .twit_content_txt`).value;
+    const updateBtn = document.querySelector(`.twit_btn_${postId}`);
     
-    console.log(beforeText);
+    const updateContent = document.querySelector(`.twit_content_${postId}`);
+    const updateText = document.querySelector(`.twit_content_${postId} .change-content`);
+    
+    const updateImg = document.querySelector(`.twit_img_${postId}`);
+    const changeNewImg = document.querySelector(`.twit_img_${postId} .changeOrNewImg`).value;
+    
+    const updateOkBtn = document.querySelector(`.twit_updateOk_btn_${postId}`);
 
-    // 이미지가 있을 경우
-    if(updateImg){
-        console.log('img가 있습니다');
-        const imgsrc = document.querySelector(`.twit_${postId} .twit-img img`).src;
-        changeImg(updateImg, imgsrc);
+    /* ----------------------------------------------
+        디스플레이 none인 속성 제거
+    ------------------------------------------------- */
+    beforeContent.style.display="none";
+    updateBtn.style.display="none";
+
+    updateContent.style.display="block";
+    updateImg.style.display="block";
+    updateOkBtn.style.display="block"
+
+    /* ----------------------------------------------
+        updateContent에 기존 글 넣기
+    ------------------------------------------------- */
+    updateText.textContent = beforeText;
+
+    /* ----------------------------------------------
+        기존글에 이미지가 있을 경우
+    ------------------------------------------------- */
+    if(changeNewImg == "changeImg"){
+        console.log('기존글에 img가 있습니다');
+        document.querySelector(`.twit_${postId} .twit-img`).style.display="none";
     }
 
-    const btnGroup = document.querySelector(`.twit_btn_${postId}`);
-
-    updateText.innerHTML = `<div class="input-group">
-                                <textarea class="change-content" id="twit" maxlength="140" rows="5" cols="80" required>${beforeText}</textarea>
-                            </div>`;
-    btnGroup.innerHTML = `<button type="button" class="btn" onclick="updateOkPost(${postUserId},${postId},'${beforeText}')">수정완료</button>
-    <button type="button" class="btn" onclick="location.href='/'">취소</button>`;
+    changeImg(postId);
 }
 
 // 이미지 변경
-// updateImg == document.querySelector(`.twit_${postId} .twit-img`);
-function changeImg(updateImg, imgsrc){
+function changeImg(postId){
 
-    updateImg.innerHTML = `<img id="change-img-preview" src="${imgsrc}" alt="섬네일" width="150">
-                            <input id="change-img-url" type="hidden" value="${imgsrc}"> 
-                            <div class="twit-img-upload">
-                            <label id="img-label" for="change-img">이미지 수정</label>
-                            <input id="change-img" class="change-img input-img" type="file" accept="image/*" >
-                            </div>`;
+    const afterImg = document.querySelector(`#twit_inputimg_${postId}`);
 
-    const afterImg = document.querySelector('.change-img');
-   
     afterImg.addEventListener('change', function(e){
-        console.log('이미지가 변경 되었습니다.')
+        console.log('이미지가 변경 되었습니다.');
         console.log(this, this.files);  // 파일태그, 파일 정보
 
         const formData = new FormData();
@@ -122,9 +130,9 @@ function changeImg(updateImg, imgsrc){
 
         axios.post('/post/img', formData)
              .then((res) => {
-                document.getElementById('change-img-url').value = res.data.url;
-                document.getElementById('change-img-preview').src = res.data.url;
-                document.getElementById('change-img-preview').style.display = "inline";
+                document.querySelector(`.twit_img_${postId} #change-img-url`).value = res.data.url;
+                document.querySelector(`.twit_img_${postId} #change-img-preview`).src = res.data.url;
+                document.querySelector(`.twit_img_${postId} #change-img-preview`).style.display = "inline";
              })
              .catch((err)=>{
                 console.error(err);
@@ -134,14 +142,15 @@ function changeImg(updateImg, imgsrc){
 }
 
 // 글 수정 완료
-function updateOkPost(postUserId, postId, beforeText){
-    console.log('수정중..!');
-    const changeContent = document.querySelector('.change-content').value;
+function updateOkPost(postUserId, postId){
+    
+    const beforeText =  document.querySelector(`.twit_${postId} .twit_content_txt`).value;
+    const changeContent = document.querySelector(`.twit_content_${postId} .change-content`).value;
 
     let changeImgUrl = '';
-    if(document.querySelector(`.twit_${postId} .twit-img`)){
+    if(document.querySelector(`.twit_img_${postId} #change-img-url`)){
         
-        let beforeStr = document.querySelector('#change-img-url').value;
+        let beforeStr = document.querySelector(`.twit_img_${postId} #change-img-url`).value;
         let afterStr = beforeStr.split('/img/');
         changeImgUrl = `/img/${afterStr[1]}`;
     }
