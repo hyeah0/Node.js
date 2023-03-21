@@ -1,6 +1,6 @@
 // 파일로 연결
 // res.render('views 폴더의 파일명', {title: })
-const {User, Post, Hashtag} = require('../models');
+const { User, Post, Hashtag } = require('../models');
 const { QueryTypes } = require("sequelize");
 const { sequelize } = require("../models/index");
 

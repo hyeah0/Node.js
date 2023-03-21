@@ -22,12 +22,19 @@ exports.uploadPost = async (req, res, next) => {
         console.log('* -------------------------------------------- *');
         console.log('  controllers.post.js uploadPost');
         console.log('* -------------------------------------------- *');
+        
+        let createDate = timestamp();
+
         // 포스트
-        const post = await Post.create({
-            content: req.body.content,  // main.html textarea
-            img: req.body.url,
-            UserId: req.user.id,
-        });
+        // const post = await Post.create({
+        //     content: req.body.content,  // main.html textarea
+        //     img: req.body.url,
+        //     UserId: req.user.id,
+        // });
+        
+        const sql = `insert into posts values(default, '${req.body.content}', '${req.body.url}', '${createDate}', '${createDate}', ${req.user.id});`;
+        const post = await sequelize.query(sql, {type: QueryTypes.INSERT});
+
         console.log(post);
         console.log('----------------------------');
 
@@ -85,17 +92,25 @@ exports.updatePost = async (req, res, next)=>{
             1. 글 수정  
                글 수정시 post 값은 1로 나온다.
         ----------------------------------------------------------------- */
-        const post = await Post.update( 
-            {/* -- 변경값 설정 ---------- */
-                id: `${req.body.data.postId}`,
-                content: `${req.body.data.changeContent}`,
-                img: `${req.body.data.changeImgUrl}`,
-            },
-            {/* -- 조건 --------------- */
-                where: {id: `${req.body.data.postId}`, UserId: `${req.body.data.postUserId}`}
-            }
-        );
-
+        let createDate = timestamp();
+        
+        // const post = await Post.update( 
+        //     {/* -- 변경값 설정 ---------- */
+        //         id: `${req.body.data.postId}`,
+        //         content: `${req.body.data.changeContent}`,
+        //         img: `${req.body.data.changeImgUrl}`,
+        //     },
+        //     {/* -- 조건 --------------- */
+        //         where: {id: `${req.body.data.postId}`, UserId: `${req.body.data.postUserId}`}
+        //     }
+        // );
+        const updatesql = `update posts 
+                              set content = '${req.body.data.changeContent}'
+                                , img = '${req.body.data.changeImgUrl}'
+                                , updatedAt = '${createDate}'
+                            where id = ${req.body.data.postId} and UserId = ${req.body.data.postUserId};`;
+        const post = await sequelize.query(updatesql, {type: QueryTypes.UPDATE});
+        
         // 화면으로 부터 작성된 글을 받아 해시태그만 추출
         const hashtags = req.body.data.changeContent.match(/#[^\s#]*/g);   // ① 재 작성된 해시태그를 정규 표현식으로 추출 (\s: 공백을 ^: 제외)
         const beforeHashtags = req.body.data.beforeContent.match(/#[^\s#]*/g);
