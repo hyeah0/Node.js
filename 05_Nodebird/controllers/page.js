@@ -1,8 +1,8 @@
 // 파일로 연결
 // res.render('views 폴더의 파일명', {title: })
 const { User, Post, Hashtag } = require('../models');
-const { QueryTypes } = require("sequelize");
-const { sequelize } = require("../models/index");
+const { QueryTypes } = require('sequelize');
+const { sequelize } = require('../models/index');
 
 exports.renderProfile = (req, res) => {
     res.render('profile', {title: '내 정보'});
