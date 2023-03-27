@@ -1,6 +1,6 @@
 # 쿠키 & 세션
 
-- [자바 쿠키 & 세션 참고 링크](https://github.com/hyeah0/SmartWeb_Contents_WebApplication_developer_class/blob/main/5_web/06_Spring/07_Cookie&Session/README.md)
+- [자바 쿠키 & 세션 참고 링크](https://github.com/hyeah0/SmartWeb_Contents_WebApplication_developer_class/tree/main/COOKIE_SESSION_JWT)
 
 ## node.js 쿠키
 
