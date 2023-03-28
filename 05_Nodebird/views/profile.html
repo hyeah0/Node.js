@@ -12,7 +12,7 @@
                 {% if user.Followings %}
                     {% for following in user.Followings %}
                         <div class="group">
-                            <a href="/">{{following.nick}}</a>
+                            <a href="/{{following.id}}/get">{{following.nick}}</a>
                             <button class="follow-btn" onclick='defollow({{following.id}})'>팔로잉</button>
                         </div>
                     {% endfor%}
@@ -23,7 +23,7 @@
                 {% if user.Followers %}
                     {% for followers in user.Followers %}
                         <div class="group">
-                            <a href="/">{{followers.nick}}</a>
+                            <a href="/{{followers.id}}/get">{{followers.nick}}</a>
                             
                             <!-- 맞팔하지 않은 경우 팔로우 버튼 생성 -->
                             {% if followers.followForFollow !== 'f4f' %}

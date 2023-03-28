@@ -1,5 +1,5 @@
 const { Post, Hashtag } = require('../models');
-const { QueryTypes, DATE } = require("sequelize");
+const { QueryTypes } = require("sequelize");
 const { sequelize } = require("../models/index");
 
 
@@ -226,4 +226,4 @@ function timestamp(){
         next(err);
     }
     
-}
+};

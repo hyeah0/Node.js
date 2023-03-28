@@ -35,10 +35,15 @@
         <!-- 로그인 & 로그아웃 상태일때  -->
         <!-- 검색창 -->
         <div class="hashtag-search">
-            <form id="hashtag-form" action="/hashtag">
-                <input type="text" name="hashtag" placeholder="태그 검색">
-                <button class="btn">검색</button>
-            </form>
+            <div>
+                <a href="/" class="btn">전체목록</a>
+            </div>
+            <div>
+                <form id="hashtag-form" action="/hashtag">
+                    <input type="text" name="hashtag" placeholder="태그 검색">
+                    <button class="btn">검색</button>
+                </form>
+            </div>
         </div>
         
         <!-- 트윗들 반복 -->
@@ -55,7 +60,7 @@
                         <!-- 글 id -->
                         <input type="hidden" value="{{twit.id}}" class="twit-id">
                         <div class="twit-author">
-                            <a href="">{{twit.postUserNick}}</a>
+                            <a href="/{{twit.postUserId}}/get">{{twit.postUserNick}}</a>
                         </div>
                         
                         <!-- 팔로우 리스트에 없는 아이디일 경우 & 본인이 아닐경우 -->

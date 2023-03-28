@@ -7,7 +7,7 @@ const { follow , defollow } = require('../controllers/user');
 
 const router = express.Router();
 
-// Post     /user:id/follow         
+// Post     /user/:id/follow         
 router.post('/:id/follow', isLoggedIn, follow);
 router.post('/:id/defollow', isLoggedIn, defollow);
 

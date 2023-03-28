@@ -62,10 +62,9 @@ const upload = multer({
 router.post('/img', isLoggedIn, upload.single('img'), afterUploadImage);
 
 const upload2 = multer();
+
 router.post('/', isLoggedIn, upload2.none(), uploadPost);
 router.put('/change', isLoggedIn, updatePost);
-
 router.delete('/delete', isLoggedIn, deletePost);
-
 
 module.exports = router;

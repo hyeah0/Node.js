@@ -205,9 +205,11 @@ input:focus{
    main 
    ------------------------------ */
 .hashtag-search{
-    display: flex;
-    justify-content: right;
+    padding: 0px 10px 0px 10px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #hashtag-form input{
