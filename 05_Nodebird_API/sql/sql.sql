@@ -38,7 +38,8 @@ WHERE (`User`.`deletedAt` IS NULL AND `User`.`id` = 1);
 --             clientSecret: uuidv4(),
 --         });
 -- 쿼리
-INSERT INTO `domains` (`id`,`host`,`type`,`clientSecret`,`createdAt`,`updatedAt`,`UserId`) VALUES (DEFAULT,?,?,?,?,?,?);
+INSERT INTO `domains` (`id`,`host`,`type`,`clientSecret`,`createdAt`,`updatedAt`,`UserId`) 
+     VALUES (DEFAULT,?,?,?,?,?,?);
 
 
 

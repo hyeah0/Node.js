@@ -76,7 +76,7 @@ npm i jsonwebtoken
   ```
   const express= require('express');
 
-  const{ verifyToken } = require('/middlewares');
+  const{ verifyToken } = require('../middlewares');
   //ㄴ 토큰 내용이 저장된 값
   const{ createToken, tokenTest } = require('../controllers/v1');
 
@@ -114,8 +114,9 @@ npm i jsonwebtoken
                 where: {clientSecret},
                 include: {
                     model: User,
-                    attribute: ['nick', 'id],
+                    attribute: ['nick', 'id'],
                 }
+            });
 
             // 등록되지 않은 도메인일 경우
             if(!domain){
@@ -131,7 +132,7 @@ npm i jsonwebtoken
                 nick: domain.User.nick,
             },process.env.JWT_SECRET,
             {
-                expireIn: '1m',     // 유효기간 1분
+                expiresIn: '1m',     // 유효기간 1분
                 issuer: 'nodebird'  // 발급자
             });
 
@@ -139,10 +140,8 @@ npm i jsonwebtoken
             return res.json({
                 code: 200,
                 message: '토큰이 발급되었습니다',
-                tocken,
-            })
-
-          });
+                token,
+            });
 
       }catch(err){
         console.error(err);
