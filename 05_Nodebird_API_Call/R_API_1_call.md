@@ -4,10 +4,10 @@
 
   - 쇼핑몰 데이터들을 모아 최저가를 알려주는 서비스 >> 2차 서비스
 
-- [API 01]() : 로그인한 사용자 정보 조회 가능
-  - [API 01 사용]()
-- API 02 : 내가 올린 포스트와 해시태그 검색 결과 확인 가능
-  - [API 02 사용]()
+- [API 01](https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API/R_API_1.md) : 로그인한 사용자 정보 조회 가능
+  - [API 01 사용](https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API_Call/R_API_1_call.md)
+- [API 02](https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API/R_API_2.md) : 내가 올린 포스트와 해시태그 검색 결과 확인 가능
+  - [API 02 사용](https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API_Call/R_API_2_call.md)
 
 # 화면
 

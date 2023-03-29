@@ -1,9 +1,17 @@
 const jwt = require('jsonwebtoken');
-const{ Domain, User } = require('../models');
+const{ Domain, User, Post, Hashtag } = require('../models');
 
-exports.createToken = async(req, res)=>{
+/* -----------------------------------------------------------
+    POST    /v1/token
+-------------------------------------------------------------- */
+exports.createToken = async (req, res)=>{
+    console.log('-----------------------------------------');
+    console.log('api controllers/v1.js createToken (v1/token)')
+    console.log('-----------------------------------------');
+
     const { clientSecret } = req.body;
     try{
+
         // 도메인 정보
         /*
             select d.* , u.nick, u.id
@@ -35,7 +43,7 @@ exports.createToken = async(req, res)=>{
             nick: domain.User.nick,
         },process.env.JWT_SECRET,
         {
-            expiresIn: '1m',     // 유효기간 1분
+            expiresIn: '5m',     // 유효기간 1분
             issuer: 'nodebird'  // 발급자
         });
 
@@ -55,6 +63,68 @@ exports.createToken = async(req, res)=>{
     }
 };
 
+/* -----------------------------------------------------------
+    GET     /v1/test
+-------------------------------------------------------------- */
 exports.tokenTest = (req, res)=>{
     res.json(res.locals.decoded);
 }
+
+/* -----------------------------------------------------------
+    GET     /v1/posts/my
+-------------------------------------------------------------- */
+exports.getMyPosts = (req, res) =>{
+
+    console.log('-----------------------------------------');
+    console.log('api controllers/v1.js getMyPosts (/v1/posts/my)')
+    console.log('-----------------------------------------');
+
+    // select * from post where userId = ${res.locals.decoded.id}
+    Post.findAll({where: {userId : res.locals.decoded.id }})
+        .then((posts)=>{
+
+            // posts == 특정 userid의 글 모두
+            console.log(posts);
+
+            res.json({
+                code: 200,
+                payload: posts,
+            });
+        })
+        .catch((err)=>{
+            console.error(err);
+            return res.status(500).json({
+                code: 500,
+                message: '서버에러',
+            });
+        });
+};
+
+/* -----------------------------------------------------------
+GET     /v1/posts/hashtag/:title
+-------------------------------------------------------------- */
+exports.getPostsByHashtag = async (req, res)=>{
+    try{
+        const hashtag = await Hashtag.findOne({ where: { title: req.params.title }});
+
+        if(!hashtag){
+            return res.status(404).json({
+                code: 404,
+                message: '검색 결과가 없습니다.',
+            })
+        }
+
+        const posts = await hashtag.getPosts();
+        return res.json({
+            code: 200,
+            payload: posts,
+        });
+
+    }catch(err){
+        console.error(err);
+        return res.status(500).json({
+            code: 500,
+            message: '서버에러',
+        });
+    }
+};
