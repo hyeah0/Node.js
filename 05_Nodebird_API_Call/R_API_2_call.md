@@ -5,6 +5,16 @@
 - [API 02](https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API/R_API_2.md) : 내가 올린 포스트와 해시태그 검색 결과 확인 가능
   - [API 02 사용](https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API_Call/R_API_2_call.md)
 
+# 화면
+
+<div>
+<img src="https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API_Call/a_md_img/get_Post.png" width="45%">
+</div>
+<div>
+<img src="https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API_Call/a_md_img/search_Hashtag_01.png" width="45%">
+<img src="https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API_Call/a_md_img/search_Hashtag_02.png" width="45%">
+</div>
+
 ## 1. routes, controllers 추가
 
 - ⬇️ Nodebird_API_Call/routes/index.js
