@@ -26,7 +26,7 @@ exports.createToken = async (req, res)=>{
             include: {
                 model: User,
                 attribute: ['nick', 'id'],
-            }
+            },
         });
 
         // 등록되지 않은 도메인일 경우
@@ -43,8 +43,8 @@ exports.createToken = async (req, res)=>{
             nick: domain.User.nick,
         },process.env.JWT_SECRET,
         {
-            expiresIn: '5m',     // 유효기간 1분
-            issuer: 'nodebird'  // 발급자
+            expiresIn: '1m',     // 유효기간 1분
+            issuer: 'nodebird',  // 발급자
         });
 
         // return 값
@@ -68,7 +68,7 @@ exports.createToken = async (req, res)=>{
 -------------------------------------------------------------- */
 exports.tokenTest = (req, res)=>{
     res.json(res.locals.decoded);
-}
+};
 
 /* -----------------------------------------------------------
     GET     /v1/posts/my
@@ -80,7 +80,7 @@ exports.getMyPosts = (req, res) =>{
     console.log('-----------------------------------------');
 
     // select * from post where userId = ${res.locals.decoded.id}
-    Post.findAll({where: {userId : res.locals.decoded.id }})
+    Post.findAll({where: { userId : res.locals.decoded.id }})
         .then((posts)=>{
 
             // posts == 특정 userid의 글 모두
