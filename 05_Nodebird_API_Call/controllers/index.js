@@ -26,11 +26,9 @@ const request = async (req, api) => {
                 clientSecret: process.env.CLIENT_SECRET,
             });
 
-            console.log(`tokenResult : ${tokenResult}`);
             req.session.jwt = tokenResult.data.token;
         }
 
-        console.log('토큰이 있습니다.');
         console.log('https://localhost:8002/v1/posts/my 로 요청');
         
         // API 요청
@@ -43,8 +41,9 @@ const request = async (req, api) => {
         if (err.response?.status === 419) { // 토큰 만료시 토큰 재발급 받기
             delete req.session.jwt;
             return request(req, api);
-        } // 419 외의 다른 에러면
-            return err.response;
+        } 
+        // 419 외의 다른 에러면
+        return err.response;
     }
 }
 
@@ -72,8 +71,10 @@ exports.getMyPosts = async (req, res, next)=>{
 exports.searchByHashtag = async (req, res, next)=>{
     try{
         const result = await request(
-            req, `/posts/hashtag/${encodeURLComponent(req.params.hashtag)}`,
+            req, `/posts/hashtag/${encodeURIComponent(req.params.hashtag)}`,
         )
+        res.json(result.data);
+
     }catch(err){
         if(err.code){
             console.error(err);

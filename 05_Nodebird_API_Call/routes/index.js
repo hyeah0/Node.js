@@ -7,9 +7,8 @@ const router = express.Router();
     GET      /myposts
     GET      /search/:hashtag
 */
-// router.get('/test', test);
-
 router.get('/myposts', getMyPosts);
 router.get('/search/:hashtag', searchByHashtag);
 
 module.exports = router;
+

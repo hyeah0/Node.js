@@ -25,7 +25,7 @@
 
   ```
   ...
-  API_URL=https://localhost:8002/v1
+  API_URL=http://localhost:8002/v1
   API_CALL_URL=http://localhost:4000
   ```
 
