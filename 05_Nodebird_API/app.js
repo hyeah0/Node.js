@@ -11,6 +11,8 @@ dotenv.config();
 
 /** -- 라우터 -- */
 const v1 = require('./routes/v1');
+const v2 = require('./routes/v2');
+
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes');
 
@@ -59,6 +61,7 @@ app.use(passport.session());
 
 /** -- 라우터 -- */
 app.use('/v1', v1);             // /v1/*   v1 가 들어간 주소는 v1 실행
+app.use('/v2', v2);             // /v2/*   v2 가 들어간 주소는 v2 실행
 app.use('/auth', authRouter);   // /auth/* auth 가 들어간 주소는 authRouter 실행
 app.use('/', indexRouter);
 
