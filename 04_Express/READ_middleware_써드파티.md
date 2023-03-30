@@ -101,19 +101,11 @@ res.clearCookie('key', 'value', {
 
 ## 4. Helmet
 
-- [CORS 참고 코드](https://github.com/hyeah0/Node.js/blob/main/04_Express/c_04_middleware_5_4_helmet.js)
+- [Helmet 참고 코드](https://github.com/hyeah0/Node.js/blob/main/04_Express/c_04_middleware_5_4_helmet.js)
 
 ## 5. CORS
 
-- CORS : Cross origin resource sharing
-
-- 클라이언트와 서버가 동일한 서버에서 동작하고 있으면 리소스를 제약없이 주고 받을 수 있지만,
-- 클라이언트가 서버와 다른 ip에서 있다면 서버에서 클라이언트에게 반응을 보낼때
-- Access-Control-Allow-Orgin을 헤더에 추가해줘야지 리소스를 주고 받을 수 있다.
-
-- 불편한점 [ Access-Control-Allow-Orgin ] 을 스펠링을 정확히 알고 있어야한다.
-- 보완 : cors >>> npm i cors (헤더에 Access-Control-Allow-Orgin 을 추가 해준다.)
-
+- [CORS 상세](https://github.com/hyeah0/Node.js/blob/main/04_Express/READ_middleware_cors.md)
 - [CORS 참고 코드](https://github.com/hyeah0/Node.js/blob/main/04_Express/code/c_04_middleware_5_5_cors.js)
 
 ## 6. Passport
@@ -121,3 +113,7 @@ res.clearCookie('key', 'value', {
 - [passport 로그인 사용 코드](https://github.com/hyeah0/Node.js/blob/main/05_Nodebird/R02_%EC%B9%B4%EC%B9%B4%EC%98%A4%EB%A1%9C%EA%B7%B8%EC%95%84%EC%9B%83.md)
 
 - [Passport 미들웨어 참고 블로그](https://inpa.tistory.com/entry/NODE-%F0%9F%93%9A-Passport-%EB%AA%A8%EB%93%88-%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C-%EC%B2%98%EB%A6%AC%EA%B3%BC%EC%A0%95-%F0%9F%92%AF-%EC%9D%B4%ED%95%B4%ED%95%98%EC%9E%90)
+
+## 7. multer
+
+- [multer 상세](https://github.com/hyeah0/Node.js/blob/main/04_Express/READ_middleware_multer.md)
