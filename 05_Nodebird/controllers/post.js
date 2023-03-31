@@ -208,7 +208,7 @@ function timestamp(){
 }
 
 /* ----------------------------------------
-    POST    /post/delete     글 삭제
+    DELETE    /post/delete     글 삭제
  ------------------------------------------ */
  exports.deletePost = async (req, res, next) => {
     try{

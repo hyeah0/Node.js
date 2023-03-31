@@ -2,13 +2,15 @@
 const express = require('express');
 
 const {isLoggedIn} = require('../middlewares');
-//const { follow } = require('../controllers/user');
 const { follow , defollow } = require('../controllers/user');
 
 const router = express.Router();
 
-// Post     /user/:id/follow         
+/* ----------------------------------------
+    POST      /user/:id/follow       팔로우
+    DELETE    /user/:id/defollow     팔로우취소
+ ------------------------------------------ */       
 router.post('/:id/follow', isLoggedIn, follow);
-router.post('/:id/defollow', isLoggedIn, defollow);
+router.delete('/:id/defollow', isLoggedIn, defollow);
 
 module.exports = router;

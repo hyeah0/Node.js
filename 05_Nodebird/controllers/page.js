@@ -103,7 +103,7 @@ exports.renderHashtag = async (req, res, next) => {
 }
 
 /* ----------------------------------------
-    GET     /:id/get : 특정 id 글 보기
+    GET     /:id/posts : 특정 id 글 보기
 ------------------------------------------- */
 exports.renderIdPost = async (req, res, next) => {
     try{

@@ -18,12 +18,12 @@ router.use((req, res, next)=>{
     GET /join    [views/join.html]
     GET /        [views/main.html]
     GET /hashtag : 해시태그 검색 결과
-    GET /:id/get : 특정 id 글 보기
+    GET /:id/posts : 특정 id 글 보기
  */
 router.get('/profile', isLoggedIn, renderProfile);
 router.get('/join', isNotLoggedIn, renderJoin);
 router.get('/', renderMain);
 router.get('/hashtag', renderHashtag);
-router.get('/:id/get', renderIdPost);
+router.get('/:id/posts', renderIdPost);
 
 module.exports = router;

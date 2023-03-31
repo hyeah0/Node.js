@@ -12,7 +12,7 @@
                 {% if user.Followings %}
                     {% for following in user.Followings %}
                         <div class="group">
-                            <a href="/{{following.id}}/get">{{following.nick}}</a>
+                            <a href="/{{following.id}}/posts">{{following.nick}}</a>
                             <button class="follow-btn" onclick='defollow({{following.id}})'>팔로잉</button>
                         </div>
                     {% endfor%}
@@ -23,7 +23,7 @@
                 {% if user.Followers %}
                     {% for followers in user.Followers %}
                         <div class="group">
-                            <a href="/{{followers.id}}/get">{{followers.nick}}</a>
+                            <a href="/{{followers.id}}/posts">{{followers.nick}}</a>
                             
                             <!-- 맞팔하지 않은 경우 팔로우 버튼 생성 -->
                             {% if followers.followForFollow !== 'f4f' %}
@@ -66,7 +66,7 @@
         console.log(`defollowId : ${defollowId}`);
         
         if(confirm('언팔로우 하시겠습니까?')){
-            axios.post(`/user/${defollowId}/defollow`)
+            axios.delete(`/user/${defollowId}/defollow`)
                  .then(()=>{
                     location.reload();
                  })

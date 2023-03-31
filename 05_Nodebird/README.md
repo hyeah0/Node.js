@@ -180,3 +180,119 @@
 </details>
 
 <hr>
+
+## Nodebird API 설계
+
+### - Page
+
+  <table>
+    <tr>
+      <th>CRUD</th>
+      <th>METHOD</th>
+      <th>URL</th>
+      <th>DESCRIPTION</th>
+    </tr>
+    <tr>
+      <td>READ</td><td>GET</td><td> /        </td>
+      <td>모든 글 보기
+      <br>[views/main.html]</td>
+    </tr>
+    <tr>
+      <td>READ</td><td>GET</td><td> /profile </td>
+      <td>팔로워, 팔로잉 리스트 보기
+      <br>[views/profile.html]</td>
+    </tr>
+    <tr>
+      <td></td><td>GET</td><td> /join    </td>
+      <td>회원가입 페이지 이동
+      <br>[views/join.html]</td>
+    <tr>
+      <td>READ</td><td>GET</td><td> /hashtag </td>
+      <td>해시태그 검색 결과 보기</td>
+    </tr>
+    <tr>
+      <td>READ</td><td>GET</td><td> /:id/post </td>
+      <td>특정 id 글 보기</td>
+    </tr>
+  </table>
+
+<hr>
+
+### - Auth
+
+  <table>
+    <tr>
+      <th>CRUD</th>
+      <th>METHOD</th>
+      <th>URL</th>
+      <th>DESCRIPTION</th>
+    </tr>
+    <tr>
+      <td>CREATE</td><td>POST</td><td>/auth/join          </td>
+      <td>회원가입</td>
+    </tr>
+    <tr>
+      <td></td><td>POST</td><td>/auth/login         </td>
+      <td>로컬 로그인</td>
+    </tr>
+    <tr>
+      <td></td><td>GET </td><td>/auth/kakao         </td>
+      <td>카카오 로그인(카카오 창 리다이렉트)</td>
+    </tr>
+    <tr>
+      <td></td><td>GET </td><td>/auth/kakao/callback</td>
+      <td>카카오 로그인 성공 여부 결과를 받아 수행</td>
+    </tr>
+    <tr>
+      <td>READ</td><td>GET </td><td>/auth/logout        </td>
+      <td>로그아웃</td>
+    </tr>
+  </table>
+
+<hr>
+
+### - Post
+
+  <table>
+    <tr>
+      <th>CRUD</th>
+      <th>METHOD</th>
+      <th>URL</th>
+      <th>DESCRIPTION</th>
+    </tr>
+    <tr>
+      <td>CREATE</td><td>POST   </td><td>/post/img   </td>
+      <td>파일 업로드</td>
+    </tr>
+    <tr>
+      <td>CREATE</td><td>POST   </td><td>/post       </td>
+      <td>글 작성</td>
+    </tr>
+    <tr>
+      <td>UPDATE</td><td>PUT    </td><td>/post/change</td>
+      <td>글 수정</td>
+    </tr>
+    <tr>
+      <td>DELETE</td><td>DELETE </td><td>/post/delete</td>
+      <td>글 삭제
+    </tr>
+  </table>
+
+### - User
+
+  <table>
+    <tr>
+      <th>CRUD</th>
+      <th>METHOD</th>
+      <th>URL</th>
+      <th>DESCRIPTION</th>
+    </tr>
+    <tr>
+        <td>CREATE</td><td>POST</td><td>/user/:id/follow  </td>
+        <td>팔로우 하기</td>
+    </tr>
+    <tr>
+      <td>DELETE</td><td>DELETE</td><td>/user/:id/defollow</td>
+      <td>팔로우취소(언팔로우)</td>
+    </tr>
+  </table>
