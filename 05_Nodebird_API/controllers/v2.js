@@ -8,6 +8,7 @@ exports.createToken = async (req, res)=>{
 
     console.log('-----------------------------------------');
     console.log('api controllers/v2.js createToken (v2/token)')
+    console.log(req.body);
     console.log('-----------------------------------------');
     const { clientSecret } = req.body;
     try{

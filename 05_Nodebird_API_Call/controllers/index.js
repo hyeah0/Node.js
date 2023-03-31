@@ -83,4 +83,13 @@ exports.searchByHashtag = async (req, res, next)=>{
     }
 };
 
+/* -----------------------------------------------------------
+    GET      / 
+-------------------------------------------------------------- */
+exports.renderMain = (req, res) => {
+    console.log('-----------------------------------------');
+    console.log('api-call controllers/index.js renderMain');
+    console.log('-----------------------------------------');
 
+    res.render('main', {key: process.env.CLIENT_SECRET})
+}

@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const rateLimit = require('express-rate-limit');
+const cors = require('cors')
+const{ Domain } = require('../models');
 
 // ⭐️ 로그인 되어있을 경우 ---------------------------------------
 exports.isLoggedIn = (req, res, next) =>{
@@ -47,7 +49,7 @@ exports.verifyToken = (req, res, next)=>{
 // ⭐️ 요청 횟수 제한 -------------------------------------------
 exports.apiLimiter = rateLimit({
     windowMs: 60 * 1000,    // 기준시간(60*1000 == 1분)
-    max: 1,                 // 허용횟수
+    max: 10,                // 허용횟수
     handler(req, res){      // 제한시간 초과시 콜백 함수
         res.status(this.statusCode).json({
             code: this.statusCode,  // 기본값 429
@@ -62,4 +64,29 @@ exports.deprecated = (req, res) =>{
         code: 410,
         message: '새로운 버전이 나왔습니다. 새로운 버전을 사용하세요.'
     })
+}
+
+// ⭐️ 일치하는 호스트인지 확인 -----------------------------------
+exports.corsWhenDomainMatches = async (req, res, next) => {
+    
+    console.log('-----------------------------------------');
+    console.log('api middlewares/index.js corsWhenDomainMatches')
+    console.log(req.body);
+    console.log(req.body.clientSecret);
+    console.log(req.get('origin'));
+    console.log('-----------------------------------------');
+
+    const domain = await Domain.findOne({
+        where: {host: new URL(req.get('origin')).host}
+    })
+
+    if(domain){
+        cors({
+            origin: req.get('origin'),
+            credentials: true,
+        })(req, res, next);
+    
+    }else{
+        next();
+    }
 }
