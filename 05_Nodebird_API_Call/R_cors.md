@@ -143,45 +143,45 @@
       <br>호스트와 비밀키가 일치할때만 cors를 허용하게 수정
 
     - ⬇️ Nodebird_API/routes/v2.js
-    <pre>
-    const express = require('express');
-
-    const{ verifyToken, apiLimiter, <b>corsWhenDomainMatches</b> } = require('../middlewares');
-
-    ...
-    const router = express.Router();
-
-    <b>router.use(corsWhenDomainMatches);</b>
-    </pre>
+        <pre>
+        const express = require('express');
+      
+        const{ verifyToken, apiLimiter, <b>corsWhenDomainMatches</b> } = require('../middlewares');
+      
+        ...
+        const router = express.Router();
+      
+        <b>router.use(corsWhenDomainMatches);</b>
+        </pre>
 
     - domain 테이블 참고 이미지
 
-      <img src="https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API_Call/a_md_img/cors_domains_table_03.png" width="100%">
+      <img src="https://github.com/hyeah0/Node.js/blob/main/05_Nodebird_API_Call/a_md_img/cors_domains_table.png" width="100%">
 
     - ⬇️ Nodebird_API/middlewares/index.js
-    <pre>
-    const rateLimit = require('express-rate-limit');
-    <b>
-    const cors = require('cors')
-    const{ Domain } = require('../models');
-    </b>
-    ...
-    <b>
-    exports.corsWhenDomainMatches = async (req, res, next) => {
-    
-        const domain = await Domain.findOne({
-            where: {host: new URL(req.get('origin').host)}
-        })
-    
-        if(domain){
-            cors({
-                origin: req.get('origin'),
-                credentials: true,
-            })(req, res, next);
+        <pre>
+        const rateLimit = require('express-rate-limit');
+        <b>
+        const cors = require('cors')
+        const{ Domain } = require('../models');
+        </b>
+        ...
+        <b>
+        exports.corsWhenDomainMatches = async (req, res, next) => {
         
-        }else{
-            next();
+            const domain = await Domain.findOne({
+                where: {host: new URL(req.get('origin').host)}
+            })
+        
+            if(domain){
+                cors({
+                    origin: req.get('origin'),
+                    credentials: true,
+                })(req, res, next);
+            
+            }else{
+                next();
+            }
         }
-    }
-    </b>
-    </pre>
+        </b>
+        </pre>
