@@ -4,7 +4,8 @@
   "description": "채팅",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app"
+    "start": "nodemon app",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -25,5 +26,8 @@
     "passport-local": "^1.0.0",
     "sequelize": "^6.29.0",
     "sequelize-cli": "^6.6.0"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
   }
 }

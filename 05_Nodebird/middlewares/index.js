@@ -1,6 +1,5 @@
 exports.isLoggedIn = (req, res, next) =>{
     
-    // 로그인 유무 확인
     if(req.isAuthenticated()){
         next();
     }else{
