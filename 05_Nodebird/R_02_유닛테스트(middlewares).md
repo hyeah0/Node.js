@@ -54,9 +54,7 @@
   - jest.fn(()=>반환값)
 
     ```
-    const req = jest.fn(()=>{
-            isAuthenticated: jest.fn(()=>true)
-    });
+    const req = { isAuthenticated: jest.fn(()=>true) };
 
     ==> req = { isAuthenticated: true }
     ```
