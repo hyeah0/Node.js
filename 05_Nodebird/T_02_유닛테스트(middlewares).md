@@ -1,6 +1,7 @@
 # 유닛테스트 하기
 
-위치 : <b>middlewares/index.js</b>
+위치 : <b>middlewares</b>
+<br>테스트 파일 : index.js
 <br>함수 : <b>isLoggedIn, isNotLoggedIn</b>
 
 ## 1. 테스트 틀 만들기

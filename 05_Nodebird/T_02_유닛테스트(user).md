@@ -1,6 +1,7 @@
 # 유닛테스트 하기
 
-위치 : <b>controllers/user.js</b>
+위치 : <b>controllers</b>
+<br>테스트 파일 : user.js
 <br>함수 : <b>follow</b>
 <br>url : <b>/user/:id/follow</b>
 <br>1. req.user.id 기준 사용자 정보가 있으면
