@@ -9,7 +9,7 @@
 1. 웹소켓 모듈 다운
 2. app.js 코드 추가
 3. 서버 웹소켓 로직 작성 (socket.js)
-4. 클라이언트 웹소켓 코드 작성 (views/index.html)
+4. 클라이언트 웹소켓 코드 작성 (views/index.html, public cli_ws_websocket.js)
 
 - 호출 화면
 
@@ -127,7 +127,7 @@
 ## 웹소켓 구현
 
 - 웹소켓 구조도
-  <img src="https://github.com/hyeah0/Node.js/blob/main/06_WebSocket/a_md_img/websocket.png" width="100%">
+  <img src="https://github.com/hyeah0/Node.js/blob/main/06_WebSocket/a_md_img/websocket.jpg" width="100%">
 
   - ws 불러와 서버를 웹소켓과 연결
 
@@ -169,7 +169,7 @@ const indexRouter = require('./routes');
       /* 웹소켓 연결시 */
       wss.on('connection', (ws, req) => {
           // 클라이언트 ip 확인
-          const id = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+          const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
           console.log('새로운 클라이언트 접속', ip);
 
@@ -206,7 +206,7 @@ const indexRouter = require('./routes');
   req.headers['x-forwarded-for'] || req.socket.remoteAddress
   ```
 
-#### - 웹소켓 상태
+#### - 웹소켓 상태, send 메서드
 
 - readyState 가 Open인지 먼저 확인 후
   <br>-> send 메서드로 클라이언트에게 메세지를 보낸다.
@@ -242,7 +242,7 @@ const indexRouter = require('./routes');
     });
     </pre>
 
-### 4. 클라이언트 웹소켓 코드 작성 (views/index.html)
+### 4. 클라이언트 웹소켓 코드 작성 (views/index.html, public cli_ws_websocket.js)
 
 - ⬇️ views/index.html
     <pre>
