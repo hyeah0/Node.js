@@ -127,6 +127,7 @@
 ## 웹소켓 구현
 
 - 웹소켓 구조도
+
   <img src="https://github.com/hyeah0/Node.js/blob/main/06_WebSocket/a_md_img/websocket.jpg" width="100%">
 
   - ws 불러와 서버를 웹소켓과 연결
