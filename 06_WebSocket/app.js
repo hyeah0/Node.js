@@ -10,7 +10,8 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const webSocket = require('./socket');
+//const webSocket = require('./socket');    // ws
+const webSocket = require('./socketIo');    // socketId
 const indexRouter = require('./routes');
 
 const app = express();
