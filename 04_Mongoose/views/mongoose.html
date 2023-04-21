@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>몽구스</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 사용자 등록 폼 -->
+        <div>
+            <form id="user-form">
+                <fieldset>
+                    <legend>사용자 등록</legend>
+                    <div><input id="userName" type="text" placeholder="이름"></div>
+                    <div><input id="userAge" type="number" min="0" placeholder="나이"></div>
+                    <div>
+                        <input id="userMarried" type="checkbox">
+                        <label for="userMarried">결혼 여부</label>
+                    </div>
+                    <div class="btn_area">
+                        <input type="submit" class="btn user_btn"value="등록">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <!-- 등록 결과 테이블 -->
+        <div class="resultTab">
+            <table id="user-list">
+                <thead>
+                    <tr>
+                        <th>아이디</th>
+                        <th>이름</th>
+                        <th>나이</th>
+                        <th>결혼</th>
+                    </tr>
+                </thead>
+                <tbody class="usr_tbody">
+                    {% for user in users %}
+                    <tr>
+                        <td>{{user.id}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.age}}</td>
+                        <td>{{'기혼' if user.married else '미혼'}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 댓글 등록 폼 -->
+        <div>
+            <form id="comment-form">
+                <fieldset>
+                    <legend>댓글 등록</legend>
+                    <div><input id="commenterId" type="text" placeholder="사용자 아이디"></div>
+                    <div><input id="comment"type="text" placeholder="댓글"></div>
+                    <div class="btn_area">
+                        <input type="submit" class="btn cmt_btn"value="등록">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <!-- 댓글 결과 테이블 -->
+        <div class="resultTab">
+            <table id="comment-list">
+                <thead>
+                    <colgroup>
+                        <col style="width: 20%">
+                        <col style="width: 20%">
+                        <col style="width: 40%">
+                        <col style="width: 10%">
+                        <col style="width: 10%">
+                    </colgroup>
+                    <tr>
+                        <th>아이디</th>
+                        <th>작성자</th>
+                        <th>댓글</th>
+                        <th>수정</th>
+                        <th>삭제</th>
+                    </tr>
+                </thead>
+                <tbody class="cmt_tbody">
+                    
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- axios를 통한 비동기 처리 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <script src="/mongoose.js"></script>
+</body>
+</html>
