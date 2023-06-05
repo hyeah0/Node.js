@@ -92,3 +92,26 @@
       <td>-</td>
     </tr>
   </table>
+
+### - 파일 불러오기
+
+```
+파일을 불러올 파일
+const 변수명 = require("./불러올파일명")
+
+사용
+변수명.설정명
+
+
+>>> 보낼파일에는
+module.exports = 함수명
+
+또는
+module.exports = {
+  handler : 함수명
+  설정명 : 함수명
+}
+
+또는
+exports.설정명 = 함수명
+```
